@@ -14,7 +14,7 @@
         <div class="card shadow mb-4">
           <div class="card-body">
             <label for="">Kelas</label>
-            <select class="form-control mb-3" id="thnakademik">
+            <select class="form-control mb-3" id="jon">
               @foreach ($items as $item)
                 <option value="{{$item->tahun_akademik}}{{$item->semester}}">{{$item->tahun_akademik}} / {{$item->semester}}</option>
               @endforeach
@@ -33,7 +33,7 @@
                 </div>
                 <input type="date" class="form-control" id="tglakhir" name="tglakhir" aria-describedby="basic-addon1">
             </div> --}}
-            <a href="" onclick="this.href='/cetakNilaiPeraka/'+ document.getElementById('thnakademik').value" class="btn btn-primary"><i class="fas fa-print mr-2"></i>Cetak Laporan</a>
+            <a href="" onclick="this.href='/cetakNilaiPeraka/{{$data->id}}/'+ document.getElementById('jon').value" class="btn btn-primary"><i class="fas fa-print mr-2"></i>Cetak Laporan</a>
           </div>
         </div>
       </div>

@@ -103,13 +103,15 @@ class NilaiController extends Controller
         return view('pages.admin.siswa.cetakNilaiSiswa', compact('items', 'data'));
     }
 
-    public function cetakNilaiPeraka($thnakademik)
+    public function cetakNilaiPeraka($id, $thnakademik)
     {
-        // dd(["kk : ".$thnakademik]);
-        // dd(["Tanggal Awal : ".$tglawal, "Tanggal Akhir : ".$tglakhir]);
-        $cetakPeraka = Siswa::all()->where('thnakademik', [$thnakademik]);
+        $data = Siswa::findOrFail($id);
+        $matapelajarans = Mapel::all();
+        $cetakPeraka = $data->mapel()->whereIn('thnakademik', [$thnakademik])->get();
 
-        $pdf = PDF::loadview('export.absenpertanggalpdf', compact('$cetakPeraka'));
-        return $pdf->download('laporan-absen.pdf');
+        return view('pages.admin.siswa.new', compact('cetakPeraka', 'data', 'matapelajarans'));
+
+        // $pdf = PDF::loadview('export.absenpertanggalpdf', compact('$cetakPeraka'));
+        // return $pdf->download('laporan-absen.pdf');
     }
 }

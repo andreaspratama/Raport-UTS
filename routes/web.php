@@ -155,7 +155,7 @@ Route::prefix('/')
             Route::get('/siswa/{id}/{idmapel}/hapus', 'NilaiController@nilaihapus');
             Route::post('/siswa/{id}/nilaiupdate', 'NilaiController@nilaiupdate');
             Route::get('cetakNilai/{siswa}/cetakProses', 'NilaiController@cetakNilai');
-            Route::get('cetakNilaiPeraka/{thnakademik}', 'NilaiController@cetakNilaiPeraka');
+            Route::get('/cetakNilaiPeraka/{siswa}/{thnakademik}', 'NilaiController@cetakNilaiPeraka');
             // Route::post('guru/store', 'TugasController@store');
         });
     });
