@@ -66,6 +66,7 @@ Route::prefix('/')
             Route::post('guru/{guru}/nilai', 'GuruController@nilai');
             Route::get('guru/exportexcel', 'GuruController@exportExcel');
             Route::get('guru/exportpdf', 'GuruController@exportPdf');
+            Route::post('guru/importexcel', 'GuruController@importExcel')->name('importexcel');
             
             Route::get('jadwalmapel', 'JadwalmapelController@index');
             Route::get('jadwalmapel/create', 'JadwalmapelController@create');
@@ -77,6 +78,7 @@ Route::prefix('/')
             Route::post('jadwalmapel/{jadwalmapel}/nilai', 'JadwalmapelController@nilai');
             Route::get('jadwalmapel/exportexcel', 'JadwalmapelController@exportExcel');
             Route::get('jadwalmapel/exportpdf', 'JadwalmapelController@exportPdf');
+            Route::post('jadwalmapel/importexcel', 'JadwalmapelController@importExcel')->name('importexcel');
     
             Route::get('mapel/{mapel}/hapus', 'MapelController@hapus');
             Route::resource('mapel', 'MapelController');
@@ -124,6 +126,7 @@ Route::prefix('/')
             // Route::post('/siswa/{id}/nilaiupdate', 'NilaiController@nilaiupdate');
             Route::get('user/{user}/hapus', 'UserController@hapus');
             Route::resource('user', 'UserController');
+            Route::post('user/importexcel', 'UserController@importExcel')->name('importExcelUser');
         });
 
         Route::group(['middleware' => ['auth', 'check:siswa']], function(){

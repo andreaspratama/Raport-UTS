@@ -10,7 +10,7 @@
   <meta name="author" content="">
 
   <title>@yield('title')</title>
-  <link rel="shortcut icon" href="{{url('../../foto/bunayya.png')}}">
+  <link rel="shortcut icon" href="{{url('../../foto/yski.png')}}">
   @stack('prepend-style')
   @include('includes.admin.style')
   @stack('addon-style')

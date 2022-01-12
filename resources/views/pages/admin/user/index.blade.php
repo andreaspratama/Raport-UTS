@@ -22,6 +22,9 @@
               <i class="fas fa-plus mr-2"></i>
               Tambah Data User
             </a>
+            <button type="button" class="btn btn-primary btn-sm mb-3 px-3 py-2" data-toggle="modal" data-target="#exampleModal">
+              Import Data
+            </button>
             <div class="table-responsive">
               <table id="User" class="table table-striped table-bordered text-center table-sm" width="100%" cellspacing="0">
                 <thead>
@@ -72,6 +75,28 @@
 
       </div>
       <!-- /.container-fluid -->
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Import Data User</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="{{route('importExcelUser')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group">
+                  <input type="file" class="form-control-file" name="file">
+                </div>
+                <button type="submit" class="btn btn-primary float-right">Save changes</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
 @endsection
 
 @push('prepend-style')

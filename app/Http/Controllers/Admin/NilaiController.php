@@ -105,9 +105,11 @@ class NilaiController extends Controller
 
     public function cetakNilaiPeraka($id, $thnakademik)
     {
+        // dd(['siswa '.$thnakademik], 'id '.$id);
         $data = Siswa::findOrFail($id);
         $matapelajarans = Mapel::all();
-        $cetakPeraka = $data->mapel()->whereIn('thnakademik', [$thnakademik])->get();
+        // $coba = $data->mapel()->get();
+        $cetakPeraka = $data->mapel()->where(['thnakademik', [$thnakademik]]);
 
         return view('pages.admin.siswa.new', compact('cetakPeraka', 'data', 'matapelajarans'));
 

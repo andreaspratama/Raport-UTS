@@ -2,11 +2,11 @@
 
 namespace App\Imports;
 
-use App\Siswa;
+use App\Guru;
 use App\User;
 use Maatwebsite\Excel\Concerns\ToModel;
 
-class SiswaImport implements ToModel
+class GuruImport implements ToModel
 {
     private $users;
 
@@ -17,12 +17,10 @@ class SiswaImport implements ToModel
 
     public function model(array $row)
     {
-        $user = $this->users->where('name', $row[2])->where('username', $row[1])->first();
-        return new Siswa([
-            'nama' => $row[2],
-            'nisn' => $row[1],
-            'unit' => $row[3],
-            'kelas' => $row[4],
+        $user = $this->users->where('name', $row[1])->where('username', $row[2])->first();
+        return new Guru([
+            'nama' => $row[1],
+            'nip' => $row[2],
             'user_id' => $user->id ?? NULL,
         ]);
     }

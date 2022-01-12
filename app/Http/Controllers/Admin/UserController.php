@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Imports\UserImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -135,5 +137,18 @@ class UserController extends Controller
         $item->delete();
 
         return redirect()->route('user.index')->with('status', 'Data Berhasil Dihapus');
+    }
+
+    public function importExcel(Request $request)
+    {
+        // Excel::import(new SiswaImport, $request->file('DataSiswa'));
+        $file = $request->file('file');
+        // dd($file);
+        $namaFile = $file->getClientOriginalName();
+        $file->move('DataUser', $namaFile);
+
+        Excel::import(new UserImport, public_path('/DataUser/'.$namaFile));
+
+        return redirect()->route('user.index')->with('status', 'Data Berhasil Ditambahkan');
     }
 }

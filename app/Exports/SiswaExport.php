@@ -22,13 +22,10 @@ class SiswaExport implements FromCollection, WithMapping, WithHeadings
         return [
             $siswa->nisn,
             $siswa->nama,
-            $siswa->tpt_lahir,
-            $siswa->tgl_lahir,
-            $siswa->jns_kelamin,
-            $siswa->agama,
-            $siswa->alamat,
-            $siswa->nama_ortu,
+            $siswa->unit,
             $siswa->kelas,
+            $siswa->created_at,
+            $siswa->updated_at,
         ];
     }
 
@@ -37,13 +34,10 @@ class SiswaExport implements FromCollection, WithMapping, WithHeadings
         return [
             'NISN',
             'Nama',
-            'Tempat Lahir',
-            'Tanggal Lahir',
-            'Jenis Kelamin',
-            'Agama',
-            'Alamat',
-            'Nama Ortu',
+            'Unit',
             'Kelas',
+            'Tanggal Dibuat',
+            'Tanggal Diupdate'
         ];
     }
 }

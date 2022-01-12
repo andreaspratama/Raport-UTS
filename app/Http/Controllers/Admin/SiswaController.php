@@ -59,6 +59,16 @@ class SiswaController extends Controller
      */
     public function store(SiswaRequest $request)
     {
+        // insert ke table users
+        $user = new User;
+        $user->role = 'siswa';
+        $user->name = $request->nama;
+        $user->username = $request->nisn;
+        $user->password = bcrypt($request->nisn);
+        $user->remember_token = Str::random(60);
+        $user->save();
+
+        $request->request->add(['user_id' => $user->id]);
         $data = $request->all();
         Siswa::create($data);
         
@@ -234,7 +244,6 @@ class SiswaController extends Controller
     public function importExcel(Request $request)
     {
         // Excel::import(new SiswaImport, $request->file('DataSiswa'));
-
         $file = $request->file('file');
         // dd($file);
         $namaFile = $file->getClientOriginalName();

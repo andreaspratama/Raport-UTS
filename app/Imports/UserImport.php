@@ -2,28 +2,21 @@
 
 namespace App\Imports;
 
-use App\Siswa;
 use App\User;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 
-class SiswaImport implements ToModel
+class UserImport implements ToModel
 {
-    private $users;
-
-    public function __construct()
-    {
-        $this->users = User::select('id', 'name', 'username')->get();
-    }
-
     public function model(array $row)
     {
-        $user = $this->users->where('name', $row[2])->where('username', $row[1])->first();
-        return new Siswa([
-            'nama' => $row[2],
-            'nisn' => $row[1],
-            'unit' => $row[3],
-            'kelas' => $row[4],
-            'user_id' => $user->id ?? NULL,
+        $rem = Str::random(60);
+        return new User([
+            'name' => $row[1],
+            'username' => $row[2],
+            'password' => bcrypt($row[2]),
+            'remember_token' => $rem,
+            'role' => $row[3]
         ]);
     }
 }

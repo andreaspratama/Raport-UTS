@@ -10,7 +10,7 @@
   <meta name="author" content="">
 
   <title>Login | SD IT Bunayya</title>
-  <link rel="shortcut icon" href="{{url('../../foto/bunayya.png')}}">
+  <link rel="shortcut icon" href="{{url('../../foto/yski.png')}}">
 
   <!-- Custom fonts for this template-->
   <link href="{{url('backend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -40,10 +40,10 @@
               <div class="col-lg-12">
                 <div class="p-5">
                   <div class="bg-atas text-center mb-4">
-                    <img src="{{url('../../foto/bunayya.png')}}" alt="">
+                    <img src="{{url('../../foto/yski.png')}}" alt="" style="width: 120px">
                   </div>
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Sistem Informasi Akademik SD IT Bunayya</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Sistem Penilaian YSKI</h1>
                   </div>
                   <form class="user" method="POST" action="/postlogin">
                     @csrf

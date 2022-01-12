@@ -12,6 +12,7 @@ use App\Jadwalmapel;
 use App\Exports\GuruExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
+use App\Imports\GuruImport;
 use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -252,6 +253,19 @@ class GuruController extends Controller
         $pdf = PDF::loadView('export.gurupdf',['guru' => $guru]);
         return $pdf->download('guru.pdf');
     }   
+
+    public function importExcel(Request $request)
+    {
+        // Excel::import(new SiswaImport, $request->file('DataSiswa'));
+        $file = $request->file('file');
+        // dd($file);
+        $namaFile = $file->getClientOriginalName();
+        $file->move('DataGuru', $namaFile);
+
+        Excel::import(new GuruImport, public_path('/DataGuru/'.$namaFile));
+
+        return redirect('/guru')->with('status', 'Data Berhasil Ditambahkan');
+    }
 
     public function jadwal()
     {

@@ -2,28 +2,31 @@
 
 namespace App\Imports;
 
-use App\Siswa;
-use App\User;
+use App\Jadwalmapel;
+use App\Mapel;
+use App\Guru;
 use Maatwebsite\Excel\Concerns\ToModel;
 
-class SiswaImport implements ToModel
+class JadmapImport implements ToModel
 {
-    private $users;
+    private $mapel;
+    private $guru;
 
     public function __construct()
     {
-        $this->users = User::select('id', 'name', 'username')->get();
+        $this->mapel = Mapel::select('id', 'kode_mapel', 'nama_mapel')->get();
+        $this->guru = Guru::select('id', 'nama', 'nip')->get();
     }
 
     public function model(array $row)
     {
-        $user = $this->users->where('name', $row[2])->where('username', $row[1])->first();
-        return new Siswa([
-            'nama' => $row[2],
-            'nisn' => $row[1],
+        $mapel = $this->mapel->where('nama_mapel', $row[2])->first();
+        $guru = $this->guru->where('nama', $row[1])->first();
+        return new Jadwalmapel([
+            'guru_id' => $guru->id ?? NULL,
+            'mapel_id' => $mapel->id ?? NULL,
             'unit' => $row[3],
             'kelas' => $row[4],
-            'user_id' => $user->id ?? NULL,
         ]);
     }
 }
@@ -31,10 +34,10 @@ class SiswaImport implements ToModel
 
 // use Illuminate\Support\Collection;
 // use Maatwebsite\Excel\Concerns\ToCollection;
-// use App\Siswa;
+// use App\Jadmap;
 // use App\User;
 
-// class SiswaImport implements ToCollection
+// class JadmapImport implements ToCollection
 // {
 //     /**
 //     * @param Collection $collection
@@ -43,7 +46,7 @@ class SiswaImport implements ToModel
 //     {
 //         // dd($collection);
 //         foreach ($collection as $row) {
-//             Siswa::create([
+//             Jadmap::create([
 //                 'nisn' => $row[1],
 //                 'nama' => $row[2],
 //                 'tpt_lahir' => $row[3],
@@ -62,7 +65,7 @@ class SiswaImport implements ToModel
 //                 'username' => $row[1],
 //                 'password' => $row[1],
 //                 'remember_token' => 'text',
-//                 'role' => 'siswa',
+//                 'role' => 'jadmap',
 //                 'image' => 'text'
 //             ]);
 

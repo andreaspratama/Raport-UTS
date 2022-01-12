@@ -19,6 +19,7 @@ class CreateSiswasTable extends Migration
             $table->string('nama');
             $table->string('unit');
             $table->string('kelas');
+            $table->bigInteger('user_id');
             $table->timestamps();
         });
     }
