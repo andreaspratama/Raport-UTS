@@ -8,27 +8,33 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <title>Data Absen</title>
+    <title>Data Nilai Siswa</title>
   </head>
   <body>
     {{-- <img src="{{url('foto/bunayya.png')}}" alt=""> --}}
-    <h3 class="text-center mb-3">Laporan Data Absen</h3>
+    <h3 class="text-center mb-3">Laporan Data Nilai Siswa</h3>
     <table class="table table-striped table-bordered text-center table-sm">
         <thead>
             <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Tanggal</th>
-                <th>Jam Masuk</th>
-                <th>Jam Keluar</th>
-                <th>Catatan</th>
+                <th>Tahun Akademik</th>
+                <th>Nama Mapel</th>
+                <th>Nilai UH1</th>
+                <th>Nilai UH2</th>
+                <th>Nilai UTS</th>
+                <th>Nilai UAS</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($cetakPeraka as $p)
+            @forelse ($item->mapel as $p)
                 <tr>
-                    <td>{{$loop->iteration}}</td>
-                    <td>{{$p->user->name}}</td>
+                    <td>{{$p->pivot->thnakademik}}</td>
+                    <td>{{$p->nama_mapel}}</td>
+                    <td>{{$p->pivot->nilai_uh1}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
             @empty
                 <tr>

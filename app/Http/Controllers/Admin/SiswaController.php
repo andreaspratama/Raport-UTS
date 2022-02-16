@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\DataTables;
 
 class SiswaController extends Controller
 {
@@ -36,9 +37,7 @@ class SiswaController extends Controller
     {
         $items = Siswa::all();
         
-        return view('pages.admin.siswa.index', [
-            'items' => $items
-        ]);
+        return view('pages.admin.siswa.index', compact('items'));
     }
 
     /**
@@ -48,7 +47,9 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.siswa.create');
+        $mapel = Mapel::all();
+
+        return view('pages.admin.siswa.create', compact('mapel'));
     }
 
     /**
@@ -122,6 +123,26 @@ class SiswaController extends Controller
         $item = Siswa::findOrFail($id);
         $item->update($data);
 
+        $data = Siswa::findOrFail($id);
+        $update_siswa = $data->user_id;
+
+        $data->update([
+            'nisn' => $request->nisn,
+            'nama' => $request->nama,
+            'kelas' => $request->kelas,
+            'unit' => $request->unit,
+            'jns_kelamin' => $request->jns_kelamin,
+            'agama' => $request->agama,
+            'alamat' => $request->alamat
+        ]);
+
+        $baru = User::find($update_siswa);
+        $baru->name = $request->nama;
+        $baru->username = $request->nisn;
+        $baru->password = bcrypt($request->nisn);
+        $baru->remember_token = Str::random(60);
+        $baru->save();
+
         // $messages = [
         //     'required' => 'Tidak boleh kosong',
         //     'min' => 'Minimal 3 karakter'
@@ -164,7 +185,7 @@ class SiswaController extends Controller
 
         $hapus_siswa = $item->user_id;
         User::where('id', $hapus_siswa)->delete();
-        Absensiswa::where('user_id', $hapus_siswa)->delete();
+        // Absensiswa::where('user_id', $hapus_siswa)->delete();
 
         return redirect('/siswa')->with('status', 'Data berhasil Dihapus');
     }

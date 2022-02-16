@@ -33,6 +33,8 @@
                     <th>Guru</th>
                     <th>Kelas</th>
                     <th>Unit</th>
+                    <th>Hari</th>
+                    <th>Jam Mulai</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -44,6 +46,8 @@
                       <td>{{$item->guru->nama}}</td>
                       <td>{{$item->kelas}}</td>
                       <td>{{$item->unit}}</td>
+                      <td>{{$item->hari}}</td>
+                      <td>{{$item->jam_mulai}}</td>
                       <td>
                           <a href="/jadwalmapel/{{$item->id}}/edit" class="btn btn-circle btn-sm btn-warning">
                               <i class="fa fa-edit"></i>

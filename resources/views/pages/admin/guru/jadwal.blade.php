@@ -27,10 +27,8 @@
                     <th>Mapel</th>
                     <th>Nama</th>
                     <th>Kelas</th>
-                    <th>Ruang</th>
                     <th>Hari</th>
                     <th>Jam Mulai</th>
-                    <th>Jam Selesai</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -40,10 +38,8 @@
                         <td>{{$item->mapel->nama_mapel}}</td>
                         <td>{{$item->guru->nama}}</td>
                         <td>{{$item->kelas}}</td>
-                        <td>{{$item->ruang->nama_ruang}}</td>
                         <td>{{$item->hari}}</td>
                         <td>{{$item->jam_mulai}}</td>
-                        <td>{{$item->jam_selesai}}</td>
                       </tr>
                     @endif
                   @endforeach

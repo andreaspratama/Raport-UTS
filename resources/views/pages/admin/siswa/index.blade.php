@@ -45,9 +45,6 @@
                       <td>{{$item->unit}}</td>
                       <td>{{$item->kelas}}</td>
                       <td>
-                        <a href="/siswa/{{$item->id}}/show"" class="btn btn-circle btn-info btn-sm">
-                            <i class="fa fa-eye"></i>
-                        </a>
                         <a href="/siswa/{{$item->id}}/edit"" class="btn btn-circle btn-warning btn-sm">
                             <i class="fa fa-edit"></i>
                         </a>
@@ -131,4 +128,28 @@
           toastr.success("{{Session::get('status')}}", "Trimakasih")
         @endif
       </script>
+      {{-- <script>
+        var datatable = $('#tableSiswa').DataTable({
+          processing: true,
+          serverSide: true,
+          ordering: true,
+          ajax: {
+            url: '{!!url()->current()!!}',
+          },
+          columns: [
+            {data: 'id', name: 'id'},
+            {data: 'nisn', name: 'nisn'},
+            {data: 'nama', name: 'nama'},
+            {data: 'unit', name: 'unit'},
+            {data: 'kelas', name: 'kelas'},
+            {
+              data: 'action',
+              name: 'action',
+              orderable: false,
+              searcable: false,
+              width: '15%'
+            },
+          ]
+        })
+      </script> --}}
 @endpush

@@ -38,16 +38,13 @@
                         <a href="{{route('mapel.edit', $item->id)}}" class="btn btn-circle btn-sm btn-warning">
                             <i class="fa fa-edit"></i>
                         </a>
-                        <a href="#" class="btn btn-sm btn-circle btn-danger delete" mapel-id="{{$item->id}}">
-                          <i class="fa fa-trash"></i>
-                        </a>
-                        {{-- <form action="{{route('mapel.destroy', $item->id)}}" method="POST" class="d-inline">
+                        <form action="{{route('mapel.destroy', $item->id)}}" method="POST" class="d-inline">
                             @csrf
                             @method('delete')
                             <button class="btn btn-circle btn-sm btn-danger">
                                 <i class="fa fa-trash"></i>
                             </button>
-                        </form> --}}
+                        </form>
                     </td>
                     </tr>
                   @endforeach

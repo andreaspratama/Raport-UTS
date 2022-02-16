@@ -19,7 +19,7 @@
                             Tambah Nilai
                         </button>
                       <div class="table-responsive">
-                        <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered table-responsive text-center nilai" id="dataTable" width="100%" cellspacing="0">
                           <thead>
                             <tr>
                               <th>Tahun Akademik</th>
@@ -29,27 +29,65 @@
                               <th>Nilai UTS</th>
                               <th>Nilai UAS</th>
                               <th>Status</th>
+                              <th>Portofolio</th>
                               <th>Aksi</th>
                             </tr>
                           </thead>
                           <tbody>
                               @foreach ($item->mapel as $mapel)
                                   <tr>
-                                    <td>{{$mapel->pivot->thnakademik}}</td>
+                                    <td>
+                                      {{$mapel->pivot->thnakademik}}
+                                    </td>
                                     <td>{{$mapel->nama_mapel}}</td>
                                     <td>
                                       @if ($mapel->pivot->nilai_uh1 >= 90)
                                           A
-                                      @elseif ($mapel->pivot->nilai_uh1 >= 75)
+                                      @elseif ($mapel->pivot->nilai_uh1 >= 85)
                                           B
-                                      @elseif ($mapel->pivot->nilai_uh1 >= 50)
+                                      @elseif ($mapel->pivot->nilai_uh1 >= 70)
                                           C
+                                      @elseif ($mapel->pivot->nilai_uh1 >= 55)
+                                          D
                                       @endif
                                     </td>
-                                    <td>{{$mapel->pivot->nilai_uh2}}</td>
-                                    <td>{{$mapel->pivot->uts}}</td>
-                                    <td>{{$mapel->pivot->uas}}</td>
+                                    <td>
+                                      @if ($mapel->pivot->nilai_uh2 >= 90)
+                                          A
+                                      @elseif ($mapel->pivot->nilai_uh2 >= 85)
+                                          B
+                                      @elseif ($mapel->pivot->nilai_uh2 >= 70)
+                                          C
+                                      @elseif ($mapel->pivot->nilai_uh2 >= 55)
+                                          D
+                                      @endif
+                                    </td>
+                                    <td>
+                                      @if ($mapel->pivot->uts >= 90)
+                                          A
+                                      @elseif ($mapel->pivot->uts >= 85)
+                                          B
+                                      @elseif ($mapel->pivot->uts >= 70)
+                                          C
+                                      @elseif ($mapel->pivot->uts >= 55)
+                                          D
+                                      @endif
+                                    </td>
+                                    <td>
+                                      @if ($mapel->pivot->uas >= 90)
+                                          A
+                                      @elseif ($mapel->pivot->uas >= 85)
+                                          B
+                                      @elseif ($mapel->pivot->uas >= 70)
+                                          C
+                                      @elseif ($mapel->pivot->uas >= 55)
+                                          D
+                                      @endif
+                                    </td>
                                     <td>{{$mapel->pivot->status}}</td>
+                                    <td>
+                                      <img src="{{Storage::url($mapel->pivot->portofolio)}}" alt="" class="img-thumbnail">
+                                    </td>
                                     <td>
                                       <a href="/siswa/{{$item->id}}/{{$mapel->id}}/nilaitambah" class="btn btn-primary btn-sm">Tambah / Edit</a>
                                       {{-- <a href="/siswa/{{$item->id}}/{{$mapel->id}}/hapus" class="btn btn-danger btn-sm">Hapus</a> --}}
@@ -83,20 +121,24 @@
             </button>
             </div>
             <div class="modal-body">
-                <form action="/siswa/{{$item->id}}/nilaitambah" method="POST">
+                <form action="/siswa/{{$item->id}}/nilaitambah" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <label for="thnakademik">Tahun Akademik</label>
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="mapel"><i class="fas fa-book-reader"></i></span>
+                    <div class="form-group">
+                      <label for="nilai">Tahun Akademik</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="nilai"><i class="far fa-id-card"></i></span>
+                        </div>
+                        <select class="custom-select" name="thnakademik" id="thnakademik" required>
+                          <option>-- Pilih Tahun Akademik --</option>
+                          @foreach ($thnakademiks as $thnak)
+                              <option value="{{$thnak->tahun_akademik}} {{$thnak->semester}}">
+                              {{$thnak->tahun_akademik}} {{$thnak->semester}}
+                              </option>
+                          @endforeach
+                        </select>
+                      </div>
                     </div>
-                    <select class="custom-select" name="thnakademik" id="thnakademik" required>
-                        <option>-- Pilih Tahun Akademik --</option>
-                        @foreach ($thnakademiks as $thnak)
-                            <option value="{{$thnak->tahun_akademik}}{{$thnak->semester}}">
-                            {{$thnak->tahun_akademik}} / {{$thnak->semester}}
-                            </option>
-                        @endforeach
-                    </select>
                     <label for="mapel">Mapel</label>
                     <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -181,6 +223,10 @@
                           @enderror
                         </div>
                     </div>
+                    <div class="form-group">
+                      <label for="portofolio">Portofolio</label>
+                      <input type="file" class="form-control-file" name="portofolio">
+                    </div>
                     <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
                 </form>
@@ -196,9 +242,14 @@
 @endpush
 
 @push('addon-script')
-      {{-- <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-      <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-      <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> --}}
+      <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+      {{-- <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> --}}
+      <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+      <script>
+        $(document).ready(function() {
+          $('.nilai').DataTable();
+        } );
+      </script>
       <script>
         @if (Session::has('status'))
           toastr.success("{{Session::get('status')}}", "Trimakasih")

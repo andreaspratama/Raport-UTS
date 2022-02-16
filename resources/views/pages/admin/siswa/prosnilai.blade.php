@@ -64,6 +64,7 @@
 @endsection
 @push('prepend-style')
       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+      <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jqueryui-editable/css/jqueryui-editable.css" rel="stylesheet"/>
       <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 @endpush
 
@@ -71,6 +72,12 @@
       <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
       <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
       <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jqueryui-editable/js/jqueryui-editable.min.js"></script>
+      <script>
+        $(document).ready(function() {
+          $('.coba').editable();
+        });
+      </script>
       <script>
         $(document).ready(function() {
           $('#tablePembayaran').DataTable();

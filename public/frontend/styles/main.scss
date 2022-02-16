@@ -1,21 +1,21 @@
 .navbar {
-    background-color: rgb(151, 151, 250);
+    background-color: #3366cc;
     .navbar-nav {
         .nav-link {
-            color: #000;
+            color: #fff;
             font-family: 'Poppins', sans-serif;
             
             &:hover {
                 border-radius: 5px;
-                color: #fff;
-                text-decoration: underline;
+                background-color: #fff;
+                color: #3366cc;
             }
         }
 
         .get-started {
             background-color: rgb(245, 245, 245);
             padding: 8px 20px 8px 20px;
-            color: rgb(151, 151, 250);
+            color: rgb(107, 107, 255);
             border: 1px solid #fff;
             border-radius: 20px;
             font-family: 'Poppins', sans-serif;

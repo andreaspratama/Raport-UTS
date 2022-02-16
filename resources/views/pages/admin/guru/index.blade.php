@@ -42,9 +42,6 @@
                         <td>{{$item->nip}}</td>
                         <td>{{$item->nama}}</td>
                         <td>
-                            <a href="/guru/{{$item->id}}/show" class="btn btn-circle btn-info btn-sm">
-                                <i class="fa fa-eye"></i>
-                            </a>
                             <a href="/guru/{{$item->id}}/edit" class="btn btn-circle btn-warning btn-sm">
                                 <i class="fa fa-edit"></i>
                             </a>

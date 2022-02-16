@@ -9,9 +9,9 @@ use App\Siswa;
 use App\Jadwalmapel;
 use App\Thnakademik;
 use App\User;
+use Illuminate\Http\Request;
 use PDF;
 use App\Exports\AbsensiswaExport;
-use Illuminate\Http\Request;
 
 class NilaiController extends Controller
 {
@@ -27,6 +27,14 @@ class NilaiController extends Controller
         $pnilai = Siswa::all()->whereBetween('kelas', [$kelas]);
 
         return view('pages.admin.siswa.prosnilai', compact('pnilai'));
+    }
+
+    public function prosesDua($kelas)
+    {
+        $pnilai = Siswa::all()->whereBetween('kelas', [$kelas]);
+        $mapel = Mapel::all();
+
+        return view('pages.admin.siswa.prosnilaibaru', compact('pnilai', 'mapel'));
     }
 
     public function detail($id)
@@ -51,7 +59,11 @@ class NilaiController extends Controller
     {
         // dd($request->all());
         $siswa = Siswa::findOrFail($id);
-        $siswa->mapel()->attach($request->mapel, ['thnakademik' => $request->thnakademik, 'nilai_uh1' => $request->nilai_uh1, 'nilai_uh2' => $request->nilai_uh2, 'uts' => $request->uts, 'uas' => $request->uas, 'status' => $request->status]);
+        // $siswa['portofolio'] = $request->file('portofolio')->store(
+        //     'assets/porto', 'public'
+        // );
+        
+        $siswa->mapel()->attach($request->mapel, ['thnakademik' => $request->thnakademik, 'nilai_uh1' => $request->nilai_uh1, 'nilai_uh2' => $request->nilai_uh2, 'uts' => $request->uts, 'uas' => $request->uas, 'status' => $request->status, 'portofolio' => $data['portofolio'] = request()->file('portofolio')->store('assets/porto', 'public')]);
 
         // $siswa->thnakademik()->attach($request->thnakademik);
 
@@ -103,17 +115,30 @@ class NilaiController extends Controller
         return view('pages.admin.siswa.cetakNilaiSiswa', compact('items', 'data'));
     }
 
-    public function cetakNilaiPeraka($id, $thnakademik)
+    public function cetakNilaiPeraka($id)
     {
-        // dd(['siswa '.$thnakademik], 'id '.$id);
-        $data = Siswa::findOrFail($id);
+        $item = Siswa::findOrFail($id);
         $matapelajarans = Mapel::all();
-        // $coba = $data->mapel()->get();
-        $cetakPeraka = $data->mapel()->where(['thnakademik', [$thnakademik]]);
 
-        return view('pages.admin.siswa.new', compact('cetakPeraka', 'data', 'matapelajarans'));
+        // return view('pages.admin.siswa.new', compact('cetakPeraka', 'data', 'matapelajarans'));
 
-        // $pdf = PDF::loadview('export.absenpertanggalpdf', compact('$cetakPeraka'));
-        // return $pdf->download('laporan-absen.pdf');
+        $pdf = PDF::loadview('export.cetakNilaiSiswapdf', compact('matapelajarans', 'item'));
+        return $pdf->download('laporan-absen.pdf');
+    }
+
+    public function cetakNilaiIndividu($id, $idmapel)
+    {
+        $item = Siswa::findOrFail($id);
+        $nilai = $item->mapel()->findOrFail($idmapel);
+        $mapel = Mapel::all();
+
+        $pdf = PDF::loadview('export.cetakNilaiIndividupdf', compact('nilai', 'item', 'mapel'));
+        return $pdf->download('laporan-absen.pdf');
+
+        // return view('pages.admin.siswa.editnilai', [
+        //     'item' => $item,
+        //     'nilai' => $nilai,
+        //     'mapel' => $mapel
+        // ]);
     }
 }

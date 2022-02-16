@@ -48,7 +48,7 @@
                   <label for="kelas">Kelas</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="kelas"><i class="far fa-user"></i></span>
+                      <span class="input-group-text" id="kelas"><i class="fas fa-users"></i></span>
                     </div>
                     <input type="text" class="form-control @error('kelas') is-invalid @enderror" placeholder="Kelas" name="kelas" value="{{old('kelas')}}">
                     @error('kelas')
@@ -62,7 +62,7 @@
                     <label for="unit">Unit</label>
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
-                        <label class="input-group-text" for="unit"><i class="fas fa-user-graduate"></i></label>
+                        <label class="input-group-text" for="unit"><i class="fas fa-school"></i></label>
                       </div>
                       <select class="custom-select" name="unit">
                         <option>-- Pilih --</option>
@@ -73,6 +73,36 @@
                         <option value="SMA">SMA</option>
                       </select>
                     </div>
+                </div>
+                <div class="form-group">
+                  <label for="hari">Hari</label>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="hari"><i class="fas fa-calendar"></i></label>
+                    </div>
+                    <select class="custom-select" name="hari">
+                      <option>-- Pilih --</option>
+                      <option value="Senin">Senin</option>
+                      <option value="Selasa">Selasa</option>
+                      <option value="Rabu">Rabu</option>
+                      <option value="Kamis">Kamis</option>
+                      <option value="Jumat">Jumat</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="jam_mulai">Jam Mulai</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="jam_mulai"><i class="fas fa-clock"></i></span>
+                    </div>
+                    <input type="time" class="form-control @error('jam_mulai') is-invalid @enderror" placeholder="Jam Mulai" name="jam_mulai" value="{{old('jam_mulai')}}">
+                    @error('jam_mulai')
+                      <div class="invalid-feedback">
+                          {{$message}}
+                      </div>
+                    @enderror
+                  </div>
                 </div>
               <button type="submit" class="btn btn-success btn-sm">Simpan</button>
               <button type="reset" class="btn btn-warning btn-sm">Reset</button>

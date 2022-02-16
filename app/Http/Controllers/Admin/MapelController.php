@@ -9,6 +9,7 @@ use App\Siswa;
 use App\Jadwalmapel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Yajra\DataTables\Facades\DataTables;
 
 class MapelController extends Controller
 {

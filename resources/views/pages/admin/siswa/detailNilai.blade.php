@@ -18,7 +18,7 @@
                         {{-- <button type="button" class="btn btn-primary mb-3 btn-sm" data-toggle="modal" data-target="#exampleModal">
                             Tambah Nilai
                         </button> --}}
-                      <a href="/cetakNilai/{{$item->id}}/cetakProses" class="btn btn-primary btn-sm mb-2">Print Nilai</a>
+                      <a href="/cetakNilai/{{$item->id}}/cetakProses" class="btn btn-primary btn-sm mb-2">Cetak Nilai Semua</a>
                       <div class="table-responsive">
                         <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
                           <thead>
@@ -30,6 +30,7 @@
                               <th>Nilai UTS</th>
                               <th>Nilai UAS</th>
                               <th>Status</th>
+                              <th>Aksi</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -37,11 +38,34 @@
                                   <tr>
                                     <td>{{$mapel->pivot->thnakademik}}</td>
                                     <td>{{$mapel->nama_mapel}}</td>
-                                    <td>{{$mapel->pivot->nilai_uh1}}</td>
-                                    <td>{{$mapel->pivot->nilai_uh2}}</td>
+                                    <td>
+                                      @if ($mapel->pivot->nilai_uh1 >= 90)
+                                          A
+                                      @elseif ($mapel->pivot->nilai_uh1 >= 85)
+                                          B
+                                      @elseif ($mapel->pivot->nilai_uh1 >= 70)
+                                          C
+                                      @elseif ($mapel->pivot->nilai_uh1 >= 55)
+                                          D
+                                      @endif
+                                    </td>
+                                    <td>
+                                      @if ($mapel->pivot->nilai_uh2 >= 90)
+                                          A
+                                      @elseif ($mapel->pivot->nilai_uh2 >= 85)
+                                          B
+                                      @elseif ($mapel->pivot->nilai_uh2 >= 70)
+                                          C
+                                      @elseif ($mapel->pivot->nilai_uh2 >= 55)
+                                          D
+                                      @endif
+                                    </td>
                                     <td>{{$mapel->pivot->uts}}</td>
                                     <td>{{$mapel->pivot->uas}}</td>
-                                    <td>{{$mapel->pivot->status}}</td>
+                                    <td><a href="#" class="coba" data-type="text" data-pk="1" data-url="/post" data-title="Enter username">{{$mapel->pivot->status}}</a></td>
+                                    <td>
+                                      <a href="/siswa/{{$item->id}}/{{$mapel->id}}/cetak" class="btn btn-primary btn-sm">Cetak Nilai</a>
+                                    </td>
                                   </tr>
                               @endforeach
                           </tbody>
@@ -172,12 +196,19 @@
 
 @push('prepend-style')
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jqueryui-editable/css/jqueryui-editable.css" rel="stylesheet"/>
 @endpush
 
 @push('addon-script')
       {{-- <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
       <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
       <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script> --}}
+      <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jqueryui-editable/js/jqueryui-editable.min.js"></script>
+      <script>
+        $(document).ready(function() {
+          $('.coba').editable();
+        });
+      </script>
       <script>
         @if (Session::has('status'))
           toastr.success("{{Session::get('status')}}", "Trimakasih")

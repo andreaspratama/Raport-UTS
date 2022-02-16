@@ -17,6 +17,7 @@ use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\DataTables;
 
 class GuruController extends Controller
 {

@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\ThnakademikRequest;
 use App\Thnakademik;
 use Illuminate\Http\Request;
 use Illuminat\Support\Str;
+use Yajra\DataTables\Facades\DataTables;
 
 class ThnakademikController extends Controller
 {
@@ -19,9 +20,7 @@ class ThnakademikController extends Controller
     {
         $items = Thnakademik::all();
 
-        return view('pages.admin.thnakademik.index', [
-            'items' => $items
-        ]);
+        return view('pages.admin.thnakademik.index', compact('items'));
     }
 
     /**

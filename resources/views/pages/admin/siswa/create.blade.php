@@ -74,6 +74,22 @@
                     </select>
                   </div>
                 </div>
+                <div class="form-group">
+                  <label for="mapel">Mapel</label>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="mapel"><i class="fas fa-book"></i></label>
+                    </div>
+                    <select class="custom-select" name="mapel_id">
+                      <option>-- Pilih --</option>
+                      @foreach ($mapel as $mpl)
+                        <option value="{{$mpl->id}}">
+                          {{$mpl->nama_mapel}}
+                        </option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
                 <button type="submit" class="btn btn-success btn-sm">Simpan</button>
                 <button type="reset" class="btn btn-warning btn-sm">Reset</button>
                 <a href="/siswa" class="btn btn-secondary btn-sm">Kembali</a>

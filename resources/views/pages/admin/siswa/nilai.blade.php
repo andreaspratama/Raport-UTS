@@ -27,6 +27,7 @@
                     <th>Nilai UTS</th>
                     <th>Nilai UAS</th>
                     <th>Status</th>
+                    <th>Portofolio</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -34,11 +35,54 @@
                       <tr>
                         <td>{{$mapel->pivot->thnakademik}}</td>
                         <td>{{$mapel->nama_mapel}}</td>
-                        <td>{{$mapel->pivot->nilai_uh1}}</td>
-                        <td>{{$mapel->pivot->nilai_uh2}}</td>
-                        <td>{{$mapel->pivot->uts}}</td>
-                        <td>{{$mapel->pivot->uas}}</td>
+                        <td>
+                          @if ($mapel->pivot->nilai_uh1 >= 90)
+                              A
+                          @elseif ($mapel->pivot->nilai_uh1 >= 85)
+                              B
+                          @elseif ($mapel->pivot->nilai_uh1 >= 70)
+                              C
+                          @elseif ($mapel->pivot->nilai_uh1 >= 55)
+                              D
+                          @endif
+                        </td>
+                        <td>
+                          @if ($mapel->pivot->nilai_uh2 >= 90)
+                              A
+                          @elseif ($mapel->pivot->nilai_uh2 >= 85)
+                              B
+                          @elseif ($mapel->pivot->nilai_uh2 >= 70)
+                              C
+                          @elseif ($mapel->pivot->nilai_uh2 >= 55)
+                              D
+                          @endif
+                        </td>
+                        <td>
+                          @if ($mapel->pivot->uts >= 90)
+                              A
+                          @elseif ($mapel->pivot->uts >= 85)
+                              B
+                          @elseif ($mapel->pivot->uts >= 70)
+                              C
+                          @elseif ($mapel->pivot->uts >= 55)
+                              D
+                          @endif
+                        </td>
+                        <td>
+                          @if ($mapel->pivot->uas >= 90)
+                              A
+                          @elseif ($mapel->pivot->uas >= 85)
+                              B
+                          @elseif ($mapel->pivot->uas >= 70)
+                              C
+                          @elseif ($mapel->pivot->uas >= 55)
+                              D
+                          @endif
+                        </td>
                         <td>{{$mapel->pivot->status}}</td>
+                        <td>
+                          <img src="{{Storage::url($mapel->pivot->portofolio)}}" class="img-thumbnail" style="width: 250px" alt="">
+                        </td>
                       </tr>
                     @endforeach
                 </tbody>

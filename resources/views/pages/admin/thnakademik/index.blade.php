@@ -41,16 +41,13 @@
                           <a href="{{route('thnakademik.edit', $item->id)}}" class="btn btn-sm btn-circle btn-warning">
                               <i class="fa fa-edit"></i>
                           </a>
-                          <a href="#" class="btn btn-sm btn-circle btn-danger delete" thnakademik-id="{{$item->id}}">
-                            <i class="fa fa-trash"></i>
-                          </a>
-                          {{-- <form action="{{route('thnakademik.destroy', $item->id)}}" method="POST" class="d-inline">
+                          <form action="{{route('thnakademik.destroy', $item->id)}}" method="POST" class="d-inline">
                               @csrf
                               @method('delete')
                               <button class="btn btn-circle btn-sm btn-danger">
                                   <i class="fa fa-trash"></i>
                               </button>
-                          </form> --}}
+                          </form>
                       </td>
                     </tr>
                   @endforeach
