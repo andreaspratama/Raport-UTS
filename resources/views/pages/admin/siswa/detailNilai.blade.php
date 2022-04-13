@@ -18,7 +18,8 @@
                         {{-- <button type="button" class="btn btn-primary mb-3 btn-sm" data-toggle="modal" data-target="#exampleModal">
                             Tambah Nilai
                         </button> --}}
-                      <a href="/cetakNilai/{{$item->id}}/cetakProses" class="btn btn-primary btn-sm mb-2">Cetak Nilai</a>
+                      {{-- <a href="/cetakNilai/{{$item->id}}/cetakProses" class="btn btn-primary btn-sm mb-2">Cetak Nilai</a> --}}
+                      <a href="/guru/nilaiProsesKelas/{{$item->kelas}}" class="btn btn-secondary btn-sm">Kembali Ke Kelas</a>
                       <h4 class="text-primary mt-3" style="font-weight: bold">Soft Skills Nilai</h4>
                       <div class="table-responsive">
                         <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
@@ -30,28 +31,50 @@
                             </tr>
                           </thead>
                           <tbody>
-                              @foreach ($item->mapel as $mapel)
-                                  <tr>
-                                    <td>{{$mapel->nama_mapel}}</td>
-                                    <td>{{$mapel->pivot->nilai}}</td>
-                                    <td>
-                                      @if ($mapel->nama_mapel === 'Critical Thinking')
-                                          Problem Solving & Kedalaman Materi
-                                      @elseif ($mapel->nama_mapel === 'Creativity')
-                                          Desain & Kreativitas Penyampaian
-                                      @elseif ($mapel->nama_mapel === 'Communication')
-                                          Kejelasan & Intonasi Suara
-                                      @elseif ($mapel->nama_mapel === 'Collaboration')
-                                          Kerjasama dan Kemampuan beradaptasi Dalam Tim
-                                      @elseif ($mapel->nama_mapel === 'Leadership')
-                                          Tanggun Jawab, Kemandirian, Kedisiplinan, Inisiatif(Individu)
+                            @foreach ($mapel as $m)
+                            <tr>
+                              <td>
+                                {{$m->nama_mapel}}
+                              </td>
+                              <td>
+                                @foreach ($item->mapel as $ma)
+                                    @if ($m->id === $ma->pivot->mapel_id)
+                                      @if ($ma->pivot->nilai >= 90)
+                                          A
+                                      @elseif ($ma->pivot->nilai >= 80)
+                                          AB
+                                      @elseif ($ma->pivot->nilai >= 70)
+                                          B
+                                      @elseif ($ma->pivot->nilai <=69)
+                                          C
                                       @endif
-                                    </td>
-                                    {{-- <td>
-                                      <a href="/siswa/{{$item->id}}/{{$mapel->id}}/cetak" class="btn btn-primary btn-sm">Cetak Nilai</a>
-                                    </td> --}}
-                                  </tr>
-                              @endforeach
+                                        {{-- {{$ma->pivot->nilai}} --}}
+                                    {{-- @elseif ($m->id === $ma->pivot->mapel_id)
+                                        {{$ma->pivot->nilai}}
+                                    @elseif ($m->id === $ma->pivot->mapel_id)
+                                        {{$ma->pivot->nilai}}
+                                    @elseif ($m->id === $ma->pivot->mapel_id)
+                                        {{$ma->pivot->nilai}}
+                                    @elseif ($m->id === $ma->pivot->mapel_id)
+                                        {{$ma->pivot->nilai}} --}}
+                                    @endif
+                                @endforeach
+                              </td>
+                              <td>
+                                @if ($m->nama_mapel === 'Critical Thinking')
+                                    Kemampuan memecahkan masalah dan kedalaman berpikir
+                                @elseif ($m->nama_mapel === 'Creativity')
+                                    Kemampuan menghasilkan karya yang autentik / orisinal
+                                @elseif ($m->nama_mapel === 'Communication')
+                                    Kemampuan dan Kejelasan menyampaikan pesan
+                                @elseif ($m->nama_mapel === 'Collaboration')
+                                    Kerjasama dan Kemampuan beradaptasi dalam tim
+                                @elseif ($m->nama_mapel === 'Leadership')
+                                    Sikap Tanggung Jawab dan Kedisiplinan
+                                @endif
+                              </td>
+                            </tr>
+                            @endforeach
                           </tbody>
                         </table>
                       </div>
@@ -67,20 +90,19 @@
                             </tr>
                           </thead>
                           <tbody>
-                              @foreach ($projects as $p)
-                                  <tr>
-                                    <td>{{$p->project}}</td>
-                                    <td>{{$p->nilai_pro}}</td>
-                                    <td>{{$p->pengerjaan}}</td>
-                                    <td>{{$p->hasil}}</td>
-                                  </tr>
-                              @endforeach
+                            @foreach ($projects as $p)
+                            <tr>
+                              <td>{{$p->project}}</td>
+                              <td>{{$p->nilai_pro}}</td>
+                              <td>{{$p->pengerjaan}}</td>
+                              <td><a href="{{$p->hasil}}">Klik Disini</a></td>
+                            </tr>
+                            @endforeach
                           </tbody>
                         </table>
                       </div>
                     </div>
                 </div>
-                <a href="/guru/nilaiProsesKelas/{{$item->kelas}}" class="btn btn-secondary btn-sm">Kembali</a>
             </div>
         </div>
 
@@ -114,9 +136,9 @@
                     </select>
                     <select class="custom-select" name="mapel" required>
                         <option>-- Pilih Mapel --</option>
-                        @foreach ($matapelajarans as $matapelajaran)
-                            <option value="{{$matapelajaran->id}}">
-                            {{$matapelajaran->nama_mapel}}
+                        @foreach ($mapel as $mapel)
+                            <option value="{{$mapel->id}}">
+                            {{$mapel->nama_mapel}}
                             </option>
                         @endforeach
                     </select>

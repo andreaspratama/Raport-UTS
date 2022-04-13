@@ -1,23 +1,31 @@
-<!doctype html>
+<page_header>
+    <div style="padding: 4mm; border: 1px solid" align="center">
+        <span style="font-size: 25px;">
+            <img src="foto/logo.png" alt="">
+        </span>
+    </div>
+</page_header>
+
+{{-- <!doctype html>
 <html lang="en">
-  <head>
+  <head> --}}
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {{-- <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> --}}
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <style>
         header {
             height: 100px;
             margin: 0;
+            background-color: #3366cc;
         }
         
         img {
             line-height: 100px;
             width: 100px;
             height: auto;
-            float: left;
         }
         .textHead {
             color: black;
@@ -32,7 +40,7 @@
             text-align: center;
         }
 
-        h3 .soft{
+        .soft{
             text-align: left;
         }
     </style>
@@ -50,21 +58,16 @@
             @endif
         </div>
       </header>
-      <hr style="color: black">
-
-    <h3>
-        Laporan Hasil Penilaian TDC Tahun Pelajaran 2021 / 2022
-    </h3>
-    <br>
     <p>
         Nama  : {{$item->nama}}
         <br>
         Kelas  : {{$item->kelas}}
     </p>
-    <h3 class="mt-3 soft" style="font-weight: bold">Soft Skills Project</h3>
+    <h3 class="mt-5 soft" style="font-weight: bold">Soft Skills Project</h3>
     <table class="table table-striped table-bordered text-center table-sm mt-3">
         <thead>
-            <tr>
+            <tr class="bg-primary text-white">
+                <th>No</th>
                 <th>Soft Skill</th>
                 <th>Nilai</th>
                 <th>Deskripsi</th>
@@ -73,22 +76,23 @@
         <tbody>
             @forelse ($matapelajarans as $m)
             <tr>
+                <td>{{$loop->iteration}}</td>
                 <td>
                   {{$m->nama_mapel}}
                 </td>
                 <td>
                   @foreach ($item->mapel as $ma)
-                      @if ($m->id === $ma->pivot->mapel_id)
-                          {{$ma->pivot->nilai}}
-                      @elseif ($m->id === $ma->pivot->mapel_id)
-                          {{$ma->pivot->nilai}}
-                      @elseif ($m->id === $ma->pivot->mapel_id)
-                          {{$ma->pivot->nilai}}
-                      @elseif ($m->id === $ma->pivot->mapel_id)
-                          {{$ma->pivot->nilai}}
-                      @elseif ($m->id === $ma->pivot->mapel_id)
-                          {{$ma->pivot->nilai}}
-                      @endif
+                    @if ($m->id === $ma->pivot->mapel_id)
+                        @if ($ma->pivot->nilai >= 90)
+                            A
+                        @elseif ($ma->pivot->nilai >= 80)
+                            AB
+                        @elseif ($ma->pivot->nilai >= 70)
+                            B
+                        @elseif ($ma->pivot->nilai <=69)
+                            C
+                        @endif
+                    @endif
                   @endforeach
                 </td>
                 <td>
@@ -104,7 +108,7 @@
                       Tanggung Jawab, Kemandirian, Kedisiplinan, Inisiatif(Individu)
                   @endif
                 </td>
-              </tr>
+              </tr> --}}
                 {{-- <tr>
                     <td>{{$p->nama_mapel}}</td>
                     <td>{{$p->pivot->nilai}}</td>
@@ -122,7 +126,7 @@
                         @endif
                     </td>
                 </tr> --}}
-            @empty
+            {{-- @empty
                 <tr>
                     <td colspan="6" class="text-center">
                         Data Kosong
@@ -131,9 +135,10 @@
             @endforelse
         </tbody>
     </table>
-    <table class="table table-striped table-bordered text-center table-sm mt-3">
+    <table class="table table-striped table-bordered text-center table-sm mt-5">
         <thead>
-            <tr>
+            <tr class="bg-primary text-white">
+                <th>No</th>
                 <th>Project</th>
                 <th>Nilai</th>
                 <th>Pengerjaan</th>
@@ -143,6 +148,7 @@
         <tbody>
             @forelse ($projects as $p)
                 <tr>
+                    <td>{{$loop->iteration}}</td>
                     <td>{{$p->project}}</td>
                     <td>{{$p->nilai_pro}}</td>
                     <td>{{$p->pengerjaan}}</td>
@@ -156,11 +162,11 @@
                 </tr>
             @endforelse
         </tbody>
-    </table>   
+    </table>    --}}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   </body>
-</html>
+</html> --}}

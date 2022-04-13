@@ -157,10 +157,12 @@ Route::prefix('/')
             Route::post('siswa/{siswa}/nilaitambah', 'NilaiController@nilai');
             Route::post('siswa/{siswa}/nilaitambahproject', 'NilaiController@nilaiproject');
             Route::get('/siswa/{id}/{idmapel}/nilaitambah', 'NilaiController@nilaitambah');
+            Route::get('/siswa/{id}/{idmapel}/nilaiedit', 'NilaiController@nilaiedit');
             Route::get('/edit/{id}/{idproject}/project', 'NilaiController@editproject');
             Route::get('/siswa/{id}/{idmapel}/cetak', 'NilaiController@cetakNilaiIndividu');
             Route::get('/siswa/{id}/{idmapel}/hapus', 'NilaiController@nilaihapus');
             Route::post('/siswa/{id}/{idmapel}/nilaiupdate', 'NilaiController@nilaiupdate');
+            Route::post('/siswa/{id}/{idmapel}/editnilaiupdate', 'NilaiController@editnilaiupdate');
             Route::put('/siswa/{id}/{idproject}/nilaiupdateproject', 'NilaiController@nilaiupdateproject');
             Route::get('cetakNilai/{siswa}/cetakProses', 'NilaiController@cetakNilaiPeraka');
             Route::get('/cetakNilaiPeraka/{siswa}/{thnakademik}', 'NilaiController@cetakNilaiPeraka');

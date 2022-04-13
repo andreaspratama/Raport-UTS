@@ -14,6 +14,7 @@ use App\Project;
 use Illuminate\Http\Request;
 use PDF;
 use App\Exports\AbsensiswaExport;
+use Spipu\Html2Pdf\Html2pdf;
 
 class NilaiController extends Controller
 {
@@ -41,22 +42,22 @@ class NilaiController extends Controller
 
     public function detail($id)
     {
-        $item = Siswa::findOrFail($id)->first();
-        $matapelajarans = Mapel::all();
+        $item = Siswa::findOrFail($id);
+        $mapel = Mapel::all();
         $thnakademiks = Thnakademik::all();
-        $projects = Project::all();
+        $projects = Project::where('siswa_id', $id)->get();
 
-        return view('pages.admin.siswa.tambahnilai', compact('item', 'matapelajarans', 'thnakademiks', 'projects'));
+        return view('pages.admin.siswa.tambahnilai', compact('item', 'mapel', 'thnakademiks', 'projects'));
     }
 
     public function detailNilai($id)
     {
         $item = Siswa::findOrFail($id);
-        $matapelajarans = Mapel::all();
+        $mapel = Mapel::all();
         $thnakademiks = Thnakademik::all();
-        $projects = Project::all();
+        $projects = Project::where('siswa_id', $id)->get();
 
-        return view('pages.admin.siswa.detailNilai', compact('item', 'matapelajarans', 'thnakademiks', 'projects'));
+        return view('pages.admin.siswa.detailNilai', compact('item', 'mapel', 'thnakademiks', 'projects'));
     }
 
     public function nilai(Request $request, $id)
@@ -100,6 +101,20 @@ class NilaiController extends Controller
         $mapel = Mapel::findOrFail($idmapel);
         $thnakademiks = Thnakademik::all();
 
+        return view('pages.admin.siswa.inputnilai', [
+            'item' => $item,
+            'mapel' => $mapel,
+            'thnakademiks' => $thnakademiks
+        ]);
+    }
+
+    public function nilaiedit($id, $idmapel)
+    {
+        $item = Siswa::findOrFail($id);
+        // $nilai = $item->mapel()->findOrFail($idmapel);
+        $mapel = Mapel::findOrFail($idmapel);
+        $thnakademiks = Thnakademik::all();
+
         return view('pages.admin.siswa.editnilai', [
             'item' => $item,
             'mapel' => $mapel,
@@ -113,6 +128,22 @@ class NilaiController extends Controller
         $mapel = Mapel::findOrFail($idmapel);
 
         $item->mapel()->attach($mapel, ['nilai' => $request->nilai]);
+        
+        // $siswa = Siswa::findOrFail($id);
+
+        // $siswa->mapel()->updateExistingPivot($request->mapel, ['nilai' => $request->nilai]);
+
+        // dd($siswa);
+
+        return redirect('siswa/'.$id.'/nilai')->with('status', 'Nilai Berhasil Ditambahkan');
+    }
+
+    public function editnilaiupdate(Request $request, $id, $idmapel)
+    {
+        $item = Siswa::findOrFail($id);
+        $mapel = Mapel::findOrFail($idmapel);
+
+        $item->mapel()->updateExistingPivot($mapel, ['nilai' => $request->nilai]);
         
         // $siswa = Siswa::findOrFail($id);
 
@@ -169,16 +200,19 @@ class NilaiController extends Controller
 
     public function cetakNilaiPeraka($id)
     {
+        // $html2pdf = new Html2Pdf('P', 'A4', 'en');
+        // $html2pdf->writeHtml(view('export.cetakNilaiSiswapdf'));
+        // $html2pdf->output();   
         // $item = Siswa::findOrFail($id);
-        $item = Siswa::findOrFail($id)->first();
-        $matapelajarans = Mapel::all();
-        $sekolah = Sekolah::all();
-        $projects = Project::all();
+        // $item = Siswa::findOrFail($id);
+        // $matapelajarans = Mapel::all();
+        // $sekolah = Sekolah::all();
+        // $projects = Project::all();
 
         // return view('pages.admin.siswa.new', compact('cetakPeraka', 'data', 'matapelajarans'));
 
-        $pdf = PDF::loadview('export.cetakNilaiSiswapdf', compact('matapelajarans', 'item', 'sekolah', 'projects'));
-        return $pdf->download('laporan-absen.pdf');
+        // $pdf = PDF::loadview('export.cetakNilaiSiswapdf', compact('matapelajarans', 'item', 'sekolah', 'projects'));
+        // return $pdf->download('laporan-absen.pdf');
     }
 
     public function cetakNilaiIndividu($id, $idmapel)

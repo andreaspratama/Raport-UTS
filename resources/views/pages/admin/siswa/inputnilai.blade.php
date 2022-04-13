@@ -1,7 +1,7 @@
 @extends('layouts.admin.admin')
 
 @section('title')
-    Edit Nilai
+    Input Nilai
 @endsection
 
 @section('content')
@@ -9,11 +9,11 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Edit Nilai Siswa {{$item->nama}}</h1>
+        <h1 class="h3 mb-2 text-gray-800">Input Nilai Siswa {{$item->nama}}</h1>
 
         <div class="card shadow">
             <div class="card-body">
-              <form action="/siswa/{{$item->id}}/{{$mapel->id}}/editnilaiupdate" method="POST">
+              <form action="/siswa/{{$item->id}}/{{$mapel->id}}/nilaiupdate" method="POST">
                 @csrf
                 <div class="form-group">
                   <label for="mapel">Mapel</label>
