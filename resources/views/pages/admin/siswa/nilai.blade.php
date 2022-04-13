@@ -35,7 +35,7 @@
                       <tr>
                         <td>{{$mapel->pivot->thnakademik}}</td>
                         <td>{{$mapel->nama_mapel}}</td>
-                        <td>
+                        {{-- <td>
                           @if ($mapel->pivot->nilai_uh1 >= 90)
                               A
                           @elseif ($mapel->pivot->nilai_uh1 >= 85)
@@ -82,7 +82,7 @@
                         <td>{{$mapel->pivot->status}}</td>
                         <td>
                           <img src="{{Storage::url($mapel->pivot->portofolio)}}" class="img-thumbnail" style="width: 250px" alt="">
-                        </td>
+                        </td> --}}
                       </tr>
                     @endforeach
                 </tbody>

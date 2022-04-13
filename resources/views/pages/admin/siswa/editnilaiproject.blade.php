@@ -1,7 +1,7 @@
 @extends('layouts.admin.admin')
 
 @section('title')
-    Edit Nilai
+    Edit Nilai Project
 @endsection
 
 @section('content')
@@ -13,16 +13,17 @@
 
         <div class="card shadow">
             <div class="card-body">
-              <form action="/siswa/{{$item->id}}/{{$mapel->id}}/nilaiupdate" method="POST">
+              <form action="/siswa/{{$item->id}}/{{$pro->id}}/nilaiupdateproject" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="form-group">
-                  <label for="mapel">Mapel</label>
+                  <label for="project">Project</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="mapel"><i class="far fa-id-card"></i></span>
+                      <span class="input-group-text" id="project"><i class="far fa-id-card"></i></span>
                     </div>
-                    <input type="text" class="form-control @error('mapel') is-invalid @enderror" placeholder="Mapel" name="mapel" value="{{$mapel->nama_mapel}}">
-                    @error('mapel')
+                    <input type="text" class="form-control @error('project') is-invalid @enderror" placeholder="Project" name="project" value="{{$pro->project}}">
+                    @error('project')
                       <div class="invalid-feedback">
                           {{$message}}
                       </div>
@@ -35,13 +36,37 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text" id="nilai"><i class="far fa-id-card"></i></span>
                       </div>
-                      <input type="text" class="form-control @error('nilai') is-invalid @enderror" placeholder="Nilai" name="nilai">
+                      <input type="text" class="form-control @error('nilai') is-invalid @enderror" placeholder="Nilai" name="nilai_pro" value="{{$pro->nilai_pro}}">
                       @error('nilai')
                         <div class="invalid-feedback">
                             {{$message}}
                         </div>
                       @enderror
                     </div>
+                </div>
+                <label for="pengerjaan">Pengerjaan</label>
+                <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="pengerjaan"><i class="fas fa-book-reader"></i></span>
+                </div>
+                <select class="custom-select" name="task" required>
+                  <option value="Individu" @if($pro->pengerjaan == 'Individu') selected @endif>Individu</option>
+                  <option value="Kelompok" @if($pro->pengerjaan == 'Kelompok') selected @endif>Kelompok</option>
+                </select>
+                </div>
+                <div class="form-group">
+                  <label for="hasil">Hasil</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="hasil"><i class="far fa-id-card"></i></span>
+                    </div>
+                    <input type="text" class="form-control @error('hasil') is-invalid @enderror" placeholder="Hasil" name="hasil" value="{{$pro->hasil}}">
+                    @error('hasil')
+                      <div class="invalid-feedback">
+                          {{$message}}
+                      </div>
+                    @enderror
+                  </div>
                 </div>
                 <button class="btn btn-primary btn-sm" type="submit">Simpan Perubahan</button>
               </form>

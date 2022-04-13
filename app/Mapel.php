@@ -21,7 +21,7 @@ class Mapel extends Model
 
     public function siswa()
     {
-        return $this->belongsToMany(Siswa::class)->withPivot(['thnakademik', 'nilai_uh1', 'nilai_uh2', 'uts', 'uas', 'status']);       
+        return $this->belongsToMany(Siswa::class)->withPivot(['thnakademik', 'nilai', 'project', 'nilai_pro', 'task', 'hasil']);       
     }
 
     // public function siswas()

@@ -18,54 +18,61 @@
                         {{-- <button type="button" class="btn btn-primary mb-3 btn-sm" data-toggle="modal" data-target="#exampleModal">
                             Tambah Nilai
                         </button> --}}
-                      <a href="/cetakNilai/{{$item->id}}/cetakProses" class="btn btn-primary btn-sm mb-2">Cetak Nilai Semua</a>
+                      <a href="/cetakNilai/{{$item->id}}/cetakProses" class="btn btn-primary btn-sm mb-2">Cetak Nilai</a>
+                      <h4 class="text-primary mt-3" style="font-weight: bold">Soft Skills Nilai</h4>
                       <div class="table-responsive">
                         <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
                           <thead>
                             <tr>
-                              <th>Tahun Akademik</th>
                               <th>Nama Mapel</th>
-                              <th>Nilai UH1</th>
-                              <th>Nilai UH2</th>
-                              <th>Nilai UTS</th>
-                              <th>Nilai UAS</th>
-                              <th>Status</th>
-                              <th>Aksi</th>
+                              <th>Nilai</th>
+                              <th>Deskripsi</th>
                             </tr>
                           </thead>
                           <tbody>
                               @foreach ($item->mapel as $mapel)
                                   <tr>
-                                    <td>{{$mapel->pivot->thnakademik}}</td>
                                     <td>{{$mapel->nama_mapel}}</td>
+                                    <td>{{$mapel->pivot->nilai}}</td>
                                     <td>
-                                      @if ($mapel->pivot->nilai_uh1 >= 90)
-                                          A
-                                      @elseif ($mapel->pivot->nilai_uh1 >= 85)
-                                          B
-                                      @elseif ($mapel->pivot->nilai_uh1 >= 70)
-                                          C
-                                      @elseif ($mapel->pivot->nilai_uh1 >= 55)
-                                          D
+                                      @if ($mapel->nama_mapel === 'Critical Thinking')
+                                          Problem Solving & Kedalaman Materi
+                                      @elseif ($mapel->nama_mapel === 'Creativity')
+                                          Desain & Kreativitas Penyampaian
+                                      @elseif ($mapel->nama_mapel === 'Communication')
+                                          Kejelasan & Intonasi Suara
+                                      @elseif ($mapel->nama_mapel === 'Collaboration')
+                                          Kerjasama dan Kemampuan beradaptasi Dalam Tim
+                                      @elseif ($mapel->nama_mapel === 'Leadership')
+                                          Tanggun Jawab, Kemandirian, Kedisiplinan, Inisiatif(Individu)
                                       @endif
                                     </td>
-                                    <td>
-                                      @if ($mapel->pivot->nilai_uh2 >= 90)
-                                          A
-                                      @elseif ($mapel->pivot->nilai_uh2 >= 85)
-                                          B
-                                      @elseif ($mapel->pivot->nilai_uh2 >= 70)
-                                          C
-                                      @elseif ($mapel->pivot->nilai_uh2 >= 55)
-                                          D
-                                      @endif
-                                    </td>
-                                    <td>{{$mapel->pivot->uts}}</td>
-                                    <td>{{$mapel->pivot->uas}}</td>
-                                    <td><a href="#" class="coba" data-type="text" data-pk="1" data-url="/post" data-title="Enter username">{{$mapel->pivot->status}}</a></td>
-                                    <td>
+                                    {{-- <td>
                                       <a href="/siswa/{{$item->id}}/{{$mapel->id}}/cetak" class="btn btn-primary btn-sm">Cetak Nilai</a>
-                                    </td>
+                                    </td> --}}
+                                  </tr>
+                              @endforeach
+                          </tbody>
+                        </table>
+                      </div>
+                      <h4 class="text-primary mt-3" style="font-weight: bold">Project Nilai</h4>
+                      <div class="table-responsive">
+                        <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
+                          <thead>
+                            <tr>
+                              <th>Project</th>
+                              <th>Nilai</th>
+                              <th>Pengerjaan</th>
+                              <th>Hasil</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              @foreach ($projects as $p)
+                                  <tr>
+                                    <td>{{$p->project}}</td>
+                                    <td>{{$p->nilai_pro}}</td>
+                                    <td>{{$p->pengerjaan}}</td>
+                                    <td>{{$p->hasil}}</td>
                                   </tr>
                               @endforeach
                           </tbody>

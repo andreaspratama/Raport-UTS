@@ -7,19 +7,29 @@ use Illuminate\Database\Eloquent\Model;
 class Siswa extends Model
 {
     protected $fillable = [
-        'nisn', 'nama', 'unit', 'kelas', 'user_id', 'mapel_id'
+        'nisn', 'nama', 'unit', 'kelas', 'user_id'
     ];
 
     protected $hidden = [];
 
     public function mapel()
     {
-        return $this->belongsToMany(Mapel::class)->withPivot(['thnakademik', 'nilai_uh1', 'nilai_uh2', 'uts', 'uas', 'status', 'portofolio']);
+        return $this->belongsToMany(Mapel::class)->withPivot(['thnakademik', 'nilai']);
+    }
+
+    public function mapeldua()
+    {
+        return $this->belongsToMany(Mapel::class)->withPivot(['project', 'nilai_pro', 'task', 'hasil']);
     }
 
     public function thnakademik()
     {
         return $this->belongsToMany(Thnakademik::class);
+    }
+
+    public function project()
+    {
+        return $this->hasMany(Project::class);
     }
 
     // public function mapels()

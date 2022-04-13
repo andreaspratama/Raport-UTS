@@ -16,13 +16,13 @@ class CreateMapelSiswaTable extends Migration
         Schema::create('mapel_siswa', function (Blueprint $table) {
             $table->id();
             $table->integer('siswa_id');
-            $table->integer('mapel_id');
-            $table->integer('thnakademik_id');
-            $table->integer('nilai_uh1')->nullable();
-            $table->integer('nilai_uh2')->nullable();
-            $table->integer('uts')->nullable();
-            $table->integer('uas')->nullable();
-            $table->string('status')->nullable();
+            $table->integer('mapel_id')->nullable();
+            $table->string('thnakademik')->nullable();
+            $table->string('nilai')->nullable();
+            $table->string('project')->nullable();
+            $table->string('nilai_pro')->nullable();
+            $table->string('task')->nullable();
+            $table->text('hasil')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

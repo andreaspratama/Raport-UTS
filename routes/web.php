@@ -155,10 +155,13 @@ Route::prefix('/')
             Route::get('siswa/{siswa}/nilai', 'NilaiController@detail');
             Route::get('siswa/{siswa}/detail', 'NilaiController@detailNilai');
             Route::post('siswa/{siswa}/nilaitambah', 'NilaiController@nilai');
+            Route::post('siswa/{siswa}/nilaitambahproject', 'NilaiController@nilaiproject');
             Route::get('/siswa/{id}/{idmapel}/nilaitambah', 'NilaiController@nilaitambah');
+            Route::get('/edit/{id}/{idproject}/project', 'NilaiController@editproject');
             Route::get('/siswa/{id}/{idmapel}/cetak', 'NilaiController@cetakNilaiIndividu');
             Route::get('/siswa/{id}/{idmapel}/hapus', 'NilaiController@nilaihapus');
-            Route::post('/siswa/{id}/nilaiupdate', 'NilaiController@nilaiupdate');
+            Route::post('/siswa/{id}/{idmapel}/nilaiupdate', 'NilaiController@nilaiupdate');
+            Route::put('/siswa/{id}/{idproject}/nilaiupdateproject', 'NilaiController@nilaiupdateproject');
             Route::get('cetakNilai/{siswa}/cetakProses', 'NilaiController@cetakNilaiPeraka');
             Route::get('/cetakNilaiPeraka/{siswa}/{thnakademik}', 'NilaiController@cetakNilaiPeraka');
             // Route::post('guru/store', 'TugasController@store');

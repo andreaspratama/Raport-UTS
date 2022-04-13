@@ -15,81 +15,130 @@
             <div class="card-body">
                 <div class="card shadow mb-4">
                     <div class="card-body">
-                        <button type="button" class="btn btn-primary mb-3 btn-sm" data-toggle="modal" data-target="#exampleModal">
-                            Tambah Nilai
-                        </button>
+                      <a href="/cetakNilai/{{$item->id}}/cetakProses" class="btn btn-primary btn-sm">Cetak Nilai {{$item->nama}}</a>
+                      <a href="/guru/nilaiProsesKelas/{{$item->kelas}}" class="btn btn-secondary btn-sm">Kembali Ke Kelas</a>
+                      <br>
+                      <br>
+                      <button type="button" class="btn btn-primary mb-3 btn-sm" data-toggle="modal"data-target="#exampleModal">
+                          Tambah Nilai
+                      </button>
+                      <h3 class="text-primary" style="font-weight: bold">Soft Skills Project</h3>
                       <div class="table-responsive">
-                        <table class="table table-bordered table-responsive text-center nilai" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0">
                           <thead>
                             <tr>
-                              <th>Tahun Akademik</th>
                               <th>Nama Mapel</th>
-                              <th>Nilai UH1</th>
-                              <th>Nilai UH2</th>
-                              <th>Nilai UTS</th>
-                              <th>Nilai UAS</th>
-                              <th>Status</th>
-                              <th>Portofolio</th>
+                              <th>Nilai</th>
+                              <th>Deskripsi</th>
                               <th>Aksi</th>
                             </tr>
                           </thead>
                           <tbody>
-                              @foreach ($item->mapel as $mapel)
+                              @foreach ($matapelajarans as $m)
+                                <tr>
+                                  <td>
+                                    {{$m->nama_mapel}}
+                                  </td>
+                                  <td>
+                                    @foreach ($item->mapel as $ma)
+                                        @if ($m->id === $ma->pivot->mapel_id)
+                                          @if ($ma->pivot->nilai >= 90)
+                                              A
+                                          @elseif ($ma->pivot->nilai >= 80)
+                                              AB
+                                          @elseif ($ma->pivot->nilai >= 70)
+                                              B
+                                          @elseif ($ma->pivot->nilai <=69)
+                                              C
+                                          @endif
+                                            {{-- {{$ma->pivot->nilai}} --}}
+                                        @elseif ($m->id === $ma->pivot->mapel_id)
+                                            {{$ma->pivot->nilai}}
+                                        @elseif ($m->id === $ma->pivot->mapel_id)
+                                            {{$ma->pivot->nilai}}
+                                        @elseif ($m->id === $ma->pivot->mapel_id)
+                                            {{$ma->pivot->nilai}}
+                                        @elseif ($m->id === $ma->pivot->mapel_id)
+                                            {{$ma->pivot->nilai}}
+                                        @endif
+                                    @endforeach
+                                  </td>
+                                  <td>
+                                    @if ($m->nama_mapel === 'Critical Thinking')
+                                        Kemampuan memecahkan masalah dan kedalaman berpikir
+                                    @elseif ($m->nama_mapel === 'Creativity')
+                                        Kemampuan menghasilkan karya yang autentik / orisinal
+                                    @elseif ($m->nama_mapel === 'Communication')
+                                        Kemampuan dan Kejelasan menyampaikan pesan
+                                    @elseif ($m->nama_mapel === 'Collaboration')
+                                        Kerjasama dan Kemampuan beradaptasi dalam tim
+                                    @elseif ($m->nama_mapel === 'Leadership')
+                                        Sikap Tanggung Jawab dan Kedisiplinan
+                                    @endif
+                                  </td>
+                                  <td>
+                                    <a href="/siswa/{{$item->id}}/{{$m->id}}/nilaitambah" class="btn btn-warning btn-sm">Edit</a>
+                                  </td>
+                                </tr>
+                              @endforeach
+                            {{-- @foreach ($item->mapel as $mapel)
+                            @endforeach --}}
+                              {{-- @foreach ($item->mapel as $mapel)
                                   <tr>
+                                    
+                                    <td>{{$mapel->pivot->nilai}}</td>
                                     <td>
-                                      {{$mapel->pivot->thnakademik}}
-                                    </td>
-                                    <td>{{$mapel->nama_mapel}}</td>
-                                    <td>
-                                      @if ($mapel->pivot->nilai_uh1 >= 90)
-                                          A
-                                      @elseif ($mapel->pivot->nilai_uh1 >= 85)
-                                          B
-                                      @elseif ($mapel->pivot->nilai_uh1 >= 70)
-                                          C
-                                      @elseif ($mapel->pivot->nilai_uh1 >= 55)
-                                          D
+                                      @if ($mapel->nama_mapel === 'Critical Thinking')
+                                          Problem Solving & Kedalaman Materi
+                                      @elseif ($mapel->nama_mapel === 'Creativity')
+                                          Desain & Kreativitas Penyampaian
+                                      @elseif ($mapel->nama_mapel === 'Communication')
+                                          Kejelasan & Intonasi Suara
+                                      @elseif ($mapel->nama_mapel === 'Collaboration')
+                                          Kerjasama dan Kemampuan beradaptasi Dalam Tim
+                                      @elseif ($mapel->nama_mapel === 'Leadership')
+                                          Tanggung Jawab, Kemandirian, Kedisiplinan, Inisiatif(Individu)
                                       @endif
                                     </td>
                                     <td>
-                                      @if ($mapel->pivot->nilai_uh2 >= 90)
-                                          A
-                                      @elseif ($mapel->pivot->nilai_uh2 >= 85)
-                                          B
-                                      @elseif ($mapel->pivot->nilai_uh2 >= 70)
-                                          C
-                                      @elseif ($mapel->pivot->nilai_uh2 >= 55)
-                                          D
-                                      @endif
-                                    </td>
+                                      <a href="/siswa/{{$item->id}}/{{$mapel->id}}/nilaitambah" class="btn btn-warning btn-sm">Edit</a> --}}
+                                      {{-- <a href="/siswa/{{$item->id}}/{{$mapel->id}}/hapus" class="btn btn-danger btn-sm">Hapus</a> --}}
+                                      {{-- <form action="/siswa/{{$item->id}}/{{$mapel->id}}/nilaihapus" method="post" class="btn btn-danger btn-sm d-inline">
+                                        @csrf
+                                        @method('delete')
+                                        Hapus
+                                      </form> --}}
+                                    {{-- </td>
+                                  </tr>
+                              @endforeach --}}
+                          </tbody>
+                        </table>
+                      </div>
+                      <button type="button" class="btn btn-primary mb-3 btn-sm" data-toggle="modal"data-target="#project">
+                        Tambah Nilai
+                      </button>
+                      <h3 class="text-primary" style="font-weight: bold">Project</h3>
+                      <div class="table-responsive">
+                        <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0">
+                          <thead>
+                            <tr>
+                              <th>Project</th>
+                              <th>Nilai</th>
+                              <th>Pengerjaan Project</th>
+                              <th>Hasil</th>
+                              <th>Aksi</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              @foreach ($projects as $p)
+                                  <tr>
+                                    <td>{{$p->project}}</td>
+                                    <td>{{$p->nilai_pro}}</td>
+                                    <td>{{$p->pengerjaan}}</td>
+                                    <td><a href="{{$p->hasil}}">Klik Disini</a></td>
                                     <td>
-                                      @if ($mapel->pivot->uts >= 90)
-                                          A
-                                      @elseif ($mapel->pivot->uts >= 85)
-                                          B
-                                      @elseif ($mapel->pivot->uts >= 70)
-                                          C
-                                      @elseif ($mapel->pivot->uts >= 55)
-                                          D
-                                      @endif
-                                    </td>
-                                    <td>
-                                      @if ($mapel->pivot->uas >= 90)
-                                          A
-                                      @elseif ($mapel->pivot->uas >= 85)
-                                          B
-                                      @elseif ($mapel->pivot->uas >= 70)
-                                          C
-                                      @elseif ($mapel->pivot->uas >= 55)
-                                          D
-                                      @endif
-                                    </td>
-                                    <td>{{$mapel->pivot->status}}</td>
-                                    <td>
-                                      <img src="{{Storage::url($mapel->pivot->portofolio)}}" alt="" class="img-thumbnail">
-                                    </td>
-                                    <td>
-                                      <a href="/siswa/{{$item->id}}/{{$mapel->id}}/nilaitambah" class="btn btn-primary btn-sm">Tambah / Edit</a>
+                                      <a href="/edit/{{$p->siswa->id}}/{{$p->id}}/project" class="btn btn-primary btn-sm btn-warning">Edit</a>
+                                      {{-- <a href="/siswa/{{$item->id}}/{{$mapel->id}}/nilaitambah" class="btn btn-primary btn-sm">Tambah / Edit</a> --}}
                                       {{-- <a href="/siswa/{{$item->id}}/{{$mapel->id}}/hapus" class="btn btn-danger btn-sm">Hapus</a> --}}
                                       {{-- <form action="/siswa/{{$item->id}}/{{$mapel->id}}/nilaihapus" method="post" class="btn btn-danger btn-sm d-inline">
                                         @csrf
@@ -104,7 +153,7 @@
                       </div>
                     </div>
                 </div>
-                <a href="/guru/nilaiProsesKelas/{{$item->kelas}}" class="btn btn-secondary btn-sm">Kembali</a>
+                {{-- <a href="/guru/nilaiProsesKelas/{{$item->kelas}}" class="btn btn-secondary btn-sm">Kembali</a> --}}
             </div>
         </div>
 
@@ -129,7 +178,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="nilai"><i class="far fa-id-card"></i></span>
                         </div>
-                        <select class="custom-select" name="thnakademik" id="thnakademik" required>
+                        <select class="custom-select" name="thnakademik" id="thnakademik">
                           <option>-- Pilih Tahun Akademik --</option>
                           @foreach ($thnakademiks as $thnak)
                               <option value="{{$thnak->tahun_akademik}} {{$thnak->semester}}">
@@ -144,7 +193,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="mapel"><i class="fas fa-book-reader"></i></span>
                     </div>                    
-                    <select class="custom-select" name="mapel" required>
+                    <select class="custom-select" name="mapel">
                         <option>-- Pilih Mapel --</option>
                         @foreach ($matapelajarans as $matapelajaran)
                             <option value="{{$matapelajaran->id}}">
@@ -154,12 +203,12 @@
                     </select>
                     </div>
                     <div class="form-group">
-                        <label for="nilai">Nilai UH1</label>
+                        <label for="nilai">Nilai</label>
                         <div class="input-group">
                           <div class="input-group-prepend">
                             <span class="input-group-text" id="nilai"><i class="far fa-id-card"></i></span>
                           </div>
-                          <input type="text" class="form-control @error('nilai') is-invalid @enderror" placeholder="Nilai UH1" name="nilai_uh1" value="{{old('nilai')}}">
+                          <input type="text" class="form-control @error('nilai') is-invalid @enderror" placeholder="Nilai" name="nilai" value="{{old('nilai')}}">
                           @error('nilai')
                             <div class="invalid-feedback">
                                 {{$message}}
@@ -167,72 +216,145 @@
                           @enderror
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="nilai">Nilai UH2</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="nilai"><i class="far fa-id-card"></i></span>
-                          </div>
-                          <input type="text" class="form-control @error('nilai') is-invalid @enderror" placeholder="Nilai UH2" name="nilai_uh2" value="{{old('nilai')}}">
-                          @error('nilai')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
-                          @enderror
+                    {{-- <div class="form-group">
+                      <label for="project">Project</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="project"><i class="far fa-id-card"></i></span>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="nilai">UTS</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="nilai"><i class="far fa-id-card"></i></span>
+                        <input type="text" class="form-control @error('project') is-invalid @enderror" placeholder="Project" name="project">
+                        @error('project')
+                          <div class="invalid-feedback">
+                              {{$message}}
                           </div>
-                          <input type="text" class="form-control @error('nilai') is-invalid @enderror" placeholder="UTS" name="uts" value="{{old('nilai')}}">
-                          @error('nilai')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
-                          @enderror
-                        </div>
+                        @enderror
+                      </div>
                     </div>
                     <div class="form-group">
-                        <label for="nilai">UAS</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="nilai"><i class="far fa-id-card"></i></span>
+                      <label for="nilai_pro">Nilai Project</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="nilai_pro"><i class="far fa-id-card"></i></span>
+                        </div>
+                        <input type="text" class="form-control @error('nilai_pro') is-invalid @enderror" placeholder="Nilai" name="nilai_pro" value="{{old('nilai_pro')}}">
+                        @error('nilai')
+                          <div class="invalid-feedback">
+                              {{$message}}
                           </div>
-                          <input type="text" class="form-control @error('nilai') is-invalid @enderror" placeholder="UAS" name="uas" value="{{old('nilai')}}">
-                          @error('nilai')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
-                          @enderror
-                        </div>
+                        @enderror
+                      </div>
+                    </div>
+                    <label for="task">Pengerjaan Project</label>
+                    <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="task"><i class="fas fa-book-reader"></i></span>
+                    </div>                    
+                    <select class="custom-select" name="task">
+                        <option value="">Pilih</option>
+                        <option value="Individu">
+                          Individu
+                        </option>
+                        <option value="Kelompok">
+                          Kelompok
+                        </option>
+                    </select>
                     </div>
                     <div class="form-group">
-                        <label for="status">Status</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="status"><i class="far fa-id-card"></i></span>
+                      <label for="hasil">Hasil</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="hasil"><i class="far fa-id-card"></i></span>
+                        </div>
+                        <input type="text" class="form-control @error('hasil') is-invalid @enderror" placeholder="Hasil" name="hasil" value="{{old('hasil')}}">
+                        @error('hasil')
+                          <div class="invalid-feedback">
+                              {{$message}}
                           </div>
-                          <input type="text" class="form-control @error('status') is-invalid @enderror" placeholder="Status" name="status" value="{{old('status')}}">
-                          @error('status')
-                            <div class="invalid-feedback">
-                                {{$message}}
-                            </div>
-                          @enderror
-                        </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="portofolio">Portofolio</label>
-                      <input type="file" class="form-control-file" name="portofolio">
-                    </div>
+                        @enderror
+                      </div>
+                    </div> --}}
                     <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
                 </form>
             </div>
         </div>
         </div>
+    </div>
+    <div class="modal fade" id="project" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tambah Nilai</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body">
+              <form action="/siswa/{{$item->id}}/nilaitambahproject" method="POST" enctype="multipart/form-data">
+                  @csrf
+                  <div class="form-group">
+                    <label for="project">Project</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="project"><i class="far fa-id-card"></i></span>
+                      </div>
+                      <input type="text" class="form-control @error('project') is-invalid @enderror" placeholder="Project" name="project">
+                      @error('project')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                      @enderror
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="nilai_pro">Nilai Project</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="nilai_pro"><i class="far fa-id-card"></i></span>
+                      </div>
+                      <input type="text" class="form-control @error('nilai_pro') is-invalid @enderror" placeholder="Nilai" name="nilai_pro" value="{{old('nilai_pro')}}">
+                      @error('nilai')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                      @enderror
+                    </div>
+                  </div>
+                  <label for="task">Pengerjaan Project</label>
+                  <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text" id="task"><i class="fas fa-book-reader"></i></span>
+                  </div>                    
+                  <select class="custom-select" name="task">
+                      <option value="">Pilih</option>
+                      <option value="Individu">
+                        Individu
+                      </option>
+                      <option value="Kelompok">
+                        Kelompok
+                      </option>
+                  </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="hasil">Hasil</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="hasil"><i class="far fa-id-card"></i></span>
+                      </div>
+                      <input type="text" class="form-control @error('hasil') is-invalid @enderror" placeholder="Hasil" name="hasil" value="{{old('hasil')}}">
+                      @error('hasil')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                      @enderror
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Batal</button>
+                  <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+              </form>
+          </div>
+      </div>
+      </div>
     </div>
 @endsection
 
@@ -251,26 +373,26 @@
         } );
       </script>
       <script>
-        @if (Session::has('status'))
-          toastr.success("{{Session::get('status')}}", "Trimakasih")
+        @if (Session::has('project'))
+          toastr.success("{{Session::get('project')}}", "Trimakasih")
         @endif
 
-        $.fn.editable.defaults.mode = 'inline';
+        // $.fn.editable.defaults.mode = 'inline';
 
-        $(document).ready(function() {
-            $('.nilai_uh1').editable();
-        });
-        $(document).ready(function() {
-            $('.nilai_uh2').editable();
-        });
-        $(document).ready(function() {
-            $('.uts').editable();
-        });
-        $(document).ready(function() {
-            $('.uas').editable();
-        });
-        $(document).ready(function() {
-            $('.status').editable();
-        });
+        // $(document).ready(function() {
+        //     $('.nilai_uh1').editable();
+        // });
+        // $(document).ready(function() {
+        //     $('.nilai_uh2').editable();
+        // });
+        // $(document).ready(function() {
+        //     $('.uts').editable();
+        // });
+        // $(document).ready(function() {
+        //     $('.uas').editable();
+        // });
+        // $(document).ready(function() {
+        //     $('.project').editable();
+        // });
       </script>
 @endpush
