@@ -74,7 +74,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action="{{route('importexcel')}}" method="POST" enctype="multipart/form-data">
+              <form action="{{route('importexcelsiswa')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                   <input type="file" class="form-control-file" name="file">

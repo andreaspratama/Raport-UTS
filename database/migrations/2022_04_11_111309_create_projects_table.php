@@ -15,11 +15,7 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->integer('siswa_id');
-            $table->string('project');
-            $table->string('nilai_pro');
-            $table->string('pengerjaan');
-            $table->text('hasil');
+            $table->string('nama');
             $table->timestamps();
         });
     }

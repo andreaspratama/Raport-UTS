@@ -10,6 +10,6 @@ class Project extends Model
 
     public function siswa()
     {
-        return $this->belongsTo(Siswa::class);
+        return $this->belongsToMany(Siswa::class)->withPivot(['thnakademik', 'nilai', 'task', 'hasil']);       
     }
 }

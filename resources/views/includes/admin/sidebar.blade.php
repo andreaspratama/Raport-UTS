@@ -43,6 +43,7 @@
           <a class="collapse-item" href="/guru">Data Guru</a>
           <a class="collapse-item" href="{{route('thnakademik.index')}}">Tahun Akademik</a>
           <a class="collapse-item" href="{{route('mapel.index')}}">Mata Pelajaran</a>
+          <a class="collapse-item" href="{{route('project.index')}}">Project</a>
           <a class="collapse-item" href="/jadwalmapel">Jadwal Pelajaran</a>
         </div>
       </div>

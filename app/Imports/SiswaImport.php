@@ -17,12 +17,12 @@ class SiswaImport implements ToModel
 
     public function model(array $row)
     {
-        $user = $this->users->where('name', $row[2])->where('username', $row[1])->first();
+        $user = $this->users->where('name', $row[1])->where('username', $row[0])->first();
         return new Siswa([
-            'nama' => $row[2],
-            'nisn' => $row[1],
-            'unit' => $row[3],
-            'kelas' => $row[4],
+            'nisn' => $row[0],
+            'nama' => $row[1],
+            'unit' => $row[2],
+            'kelas' => $row[3],
             'user_id' => $user->id ?? NULL,
         ]);
     }

@@ -1,7 +1,7 @@
 @extends('layouts.admin.admin')
 
 @section('title')
-    Data Mata Pelajaran
+    Data Project
 @endsection
 
 @section('content')
@@ -9,22 +9,21 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Data Mata Pelajaran</h1>
+        <h1 class="h3 mb-2 text-gray-800">Data Project</h1>
         
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
           <div class="card-body">
-            <a href="{{route('mapel.create')}}" class="btn btn-primary btn-sm mb-3 px-3 py-2">
+            <a href="{{route('project.create')}}" class="btn btn-primary btn-sm mb-3 px-3 py-2">
               <i class="fas fa-plus mr-2"></i>
               Tambah Data
             </a>
             <div class="table-responsive">
-              <table class="table table-striped table-sm table-bordered text-center" id="tableMapel" width="100%" cellspacing="0">
+              <table class="table table-striped table-sm table-bordered text-center" id="tableProject" width="100%" cellspacing="0">
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Kode Makul</th>
-                    <th>Nama Makul</th>
+                    <th>Project</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -32,20 +31,19 @@
                   @foreach ($items as $item)
                     <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$item->kode_mapel}}</td>
-                    <td>{{$item->nama_mapel}}</td>
+                    <td>{{$item->nama}}</td>
                     <td>
-                        <a href="{{route('mapel.edit', $item->id)}}" class="btn btn-circle btn-sm btn-warning">
+                        <a href="{{route('project.edit', $item->id)}}" class="btn btn-circle btn-sm btn-warning">
                             <i class="fa fa-edit"></i>
                         </a>
-                        {{-- <form action="{{route('mapel.destroy', $item->id)}}" method="POST" class="d-inline">
+                        {{-- <form action="{{route('project.destroy', $item->id)}}" method="POST" class="d-inline">
                             @csrf
                             @method('delete')
                             <button class="btn btn-circle btn-sm btn-danger">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </form> --}}
-                        <a href="#" class="btn btn-sm btn-circle btn-danger delete" mapel-nama="{{$item->nama}}" mapel-id="{{$item->id}}">
+                        <a href="#" class="btn btn-sm btn-circle btn-danger delete" project-nama="{{$item->nama}}" project-id="{{$item->id}}">
                           <i class="fa fa-trash"></i>
                         </a>
                     </td>
@@ -72,15 +70,15 @@
       <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
       <script>
         $(document).ready(function() {
-          $('#tableMapel').DataTable();
+          $('#tableProject').DataTable();
         } );
       </script>
       <script>
         $('.delete').click(function(){
-          var $mapelid = $(this).attr('mapel-id');
+          var $projectid = $(this).attr('project-id');
           swal({
             title: "Apakah Kamu Yakin",
-            text: "Data Mapel Akan Terhapus",
+            text: "Data Project Akan Terhapus",
             icon: "warning",
             buttons: true,
             dangerMode: true,
@@ -88,7 +86,7 @@
           .then((willDelete) => {
               console.log(willDelete);
             if (willDelete) {
-              window.location = "mapel/"+$mapelid+"/hapus";
+              window.location = "project/"+$projectid+"/hapus";
             } else {
               swal("Data Tidak Terhapus");
             }

@@ -50,7 +50,7 @@ Route::prefix('/')
             // Route::get('/siswa/{siswa}/hapusnilai', 'SiswaController@hapusnilai');
             Route::get('siswa/{siswa}/nilaiedit', 'SiswaController@nilaiedit');
             Route::get('siswa/exportexcel', 'SiswaController@exportExcel');
-            Route::post('siswa/importexcel', 'SiswaController@importExcel')->name('importexcel');
+            Route::post('siswa/importexcel', 'SiswaController@importExcel')->name('importexcelsiswa');
             Route::get('siswa/exportpdf', 'SiswaController@exportPdf');
             Route::get('siswa/{siswa}/nilaiexport', 'SiswaController@exportNilaiPdf');
             Route::get('ubahPassword', 'PasswordController@create')->name('password.create');
@@ -66,7 +66,7 @@ Route::prefix('/')
             Route::post('guru/{guru}/nilai', 'GuruController@nilai');
             Route::get('guru/exportexcel', 'GuruController@exportExcel');
             Route::get('guru/exportpdf', 'GuruController@exportPdf');
-            Route::post('guru/importexcel', 'GuruController@importExcel')->name('importexcel');
+            Route::post('guru/importexcel', 'GuruController@importExcel')->name('importexcelguru');
             
             Route::get('jadwalmapel', 'JadwalmapelController@index');
             Route::get('jadwalmapel/create', 'JadwalmapelController@create');
@@ -82,6 +82,8 @@ Route::prefix('/')
     
             Route::get('mapel/{mapel}/hapus', 'MapelController@hapus');
             Route::resource('mapel', 'MapelController');
+            Route::get('project/{project}/hapus', 'ProjectController@hapus');
+            Route::resource('project', 'ProjectController');
             Route::get('cetakTglklsPdf', 'TinggalkelasController@cetakPDF')->name('tglkelas.cetakpdf');
             Route::get('cetakTglklsExcel', 'TinggalkelasController@cetakEXCEL')->name('tglkelas.cetakexcel');
             Route::get('siswa/{tinggalkelas}/tinggalkelas', 'TinggalkelasController@hapus')->name('tglkelas');
@@ -157,11 +159,15 @@ Route::prefix('/')
             Route::post('siswa/{siswa}/nilaitambah', 'NilaiController@nilai');
             Route::post('siswa/{siswa}/nilaitambahproject', 'NilaiController@nilaiproject');
             Route::get('/siswa/{id}/{idmapel}/nilaitambah', 'NilaiController@nilaitambah');
+            Route::post('/siswa/{id}/{idmapel}/nilaiupdate', 'NilaiController@nilaiupdate');
+            Route::get('/siswa/{id}/{idproject}/nilaitambahproject', 'NilaiController@nilaitambahproject');
+            Route::post('/siswa/{id}/{idproject}/nilaiupdateproject', 'NilaiController@nilaiupdateproject');
             Route::get('/siswa/{id}/{idmapel}/nilaiedit', 'NilaiController@nilaiedit');
+            Route::get('/siswa/{id}/{idproject}/nilaieditproject', 'NilaiController@nilaieditproject');
+            Route::post('/siswa/{id}/{idproject}/editnilaiupdateproject', 'NilaiController@editnilaiupdateproject');
             Route::get('/edit/{id}/{idproject}/project', 'NilaiController@editproject');
             Route::get('/siswa/{id}/{idmapel}/cetak', 'NilaiController@cetakNilaiIndividu');
             Route::get('/siswa/{id}/{idmapel}/hapus', 'NilaiController@nilaihapus');
-            Route::post('/siswa/{id}/{idmapel}/nilaiupdate', 'NilaiController@nilaiupdate');
             Route::post('/siswa/{id}/{idmapel}/editnilaiupdate', 'NilaiController@editnilaiupdate');
             Route::put('/siswa/{id}/{idproject}/nilaiupdateproject', 'NilaiController@nilaiupdateproject');
             Route::get('cetakNilai/{siswa}/cetakProses', 'NilaiController@cetakNilaiPeraka');

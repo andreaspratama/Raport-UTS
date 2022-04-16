@@ -17,11 +17,6 @@ class Siswa extends Model
         return $this->belongsToMany(Mapel::class)->withPivot(['thnakademik', 'nilai']);
     }
 
-    public function mapeldua()
-    {
-        return $this->belongsToMany(Mapel::class)->withPivot(['project', 'nilai_pro', 'task', 'hasil']);
-    }
-
     public function thnakademik()
     {
         return $this->belongsToMany(Thnakademik::class);
@@ -29,7 +24,7 @@ class Siswa extends Model
 
     public function project()
     {
-        return $this->hasMany(Project::class);
+        return $this->belongsToMany(Project::class)->withPivot(['thnakademik', 'nilai', 'task', 'hasil']);
     }
 
     // public function mapels()

@@ -45,7 +45,7 @@ class NilaiController extends Controller
         $item = Siswa::findOrFail($id);
         $mapel = Mapel::all();
         $thnakademiks = Thnakademik::all();
-        $projects = Project::where('siswa_id', $id)->get();
+        $projects = Project::all();
 
         return view('pages.admin.siswa.tambahnilai', compact('item', 'mapel', 'thnakademiks', 'projects'));
     }
@@ -82,16 +82,18 @@ class NilaiController extends Controller
         // return redirect('siswa/'.$id.'/nilai')->with('status', 'Nilai Berhasil Ditambahkan');
     }
 
-    public function nilaiproject(Request $request, $id)
+    public function nilaitambahproject($id, $idproject)
     {
-        $data = Siswa::findOrFail($id);
-        $siswa = new Project;
-        $siswa->siswa_id = $data->id;
-        $siswa->project = $request->project;
-        $siswa->nilai_pro = $request->nilai_pro;
-        $siswa->pengerjaan = $request->task;
-        $siswa->hasil = $request->hasil;
-        $siswa->save();
+        $item = Siswa::findOrFail($id);
+        // $nilai = $item->mapel()->findOrFail($idmapel);
+        $project = Project::findOrFail($idproject);
+        $thnakademiks = Thnakademik::all();
+
+        return view('pages.admin.siswa.inputnilaiproject', [
+            'item' => $item,
+            'project' => $project,
+            'thnakademiks' => $thnakademiks
+        ]);
     }
 
     public function nilaitambah($id, $idmapel)
@@ -111,13 +113,30 @@ class NilaiController extends Controller
     public function nilaiedit($id, $idmapel)
     {
         $item = Siswa::findOrFail($id);
-        // $nilai = $item->mapel()->findOrFail($idmapel);
+        $isi = $item->mapel()->findOrFail($idmapel);
         $mapel = Mapel::findOrFail($idmapel);
         $thnakademiks = Thnakademik::all();
 
         return view('pages.admin.siswa.editnilai', [
             'item' => $item,
             'mapel' => $mapel,
+            'thnakademiks' => $thnakademiks,
+            'isi' => 'isi'
+        ]);
+    }
+
+    public function nilaieditproject($id, $idproject)
+    {
+        $item = Siswa::findOrFail($id);
+        // $nilai = $item->mapel()->findOrFail($idmapel);
+        $isi = $item->project()->findOrFail($idproject);
+        $project = Project::findOrFail($idproject);
+        $thnakademiks = Thnakademik::all();
+
+        return view('pages.admin.siswa.editnilaiproject', [
+            'item' => $item,
+            'project' => $project,
+            'isi' => $isi,
             'thnakademiks' => $thnakademiks
         ]);
     }
@@ -128,6 +147,22 @@ class NilaiController extends Controller
         $mapel = Mapel::findOrFail($idmapel);
 
         $item->mapel()->attach($mapel, ['nilai' => $request->nilai]);
+        
+        // $siswa = Siswa::findOrFail($id);
+
+        // $siswa->mapel()->updateExistingPivot($request->mapel, ['nilai' => $request->nilai]);
+
+        // dd($siswa);
+
+        return redirect('siswa/'.$id.'/nilai')->with('status', 'Nilai Berhasil Ditambahkan');
+    }
+
+    public function nilaiupdateproject(Request $request, $id, $idproject)
+    {
+        $item = Siswa::findOrFail($id);
+        $project = Project::findOrFail($idproject);
+
+        $item->project()->attach($project, ['nilai' => $request->nilai, 'task' => $request->task, 'hasil' => $request->hasil]);
         
         // $siswa = Siswa::findOrFail($id);
 
@@ -154,6 +189,22 @@ class NilaiController extends Controller
         return redirect('siswa/'.$id.'/nilai')->with('status', 'Nilai Berhasil Ditambahkan');
     }
 
+    public function editnilaiupdateproject(Request $request, $id, $idproject)
+    {
+        $item = Siswa::findOrFail($id);
+        $project = Project::findOrFail($idproject);
+
+        $item->project()->updateExistingPivot($project, ['nilai' => $request->nilai, 'task' => $request->task, 'hasil' => $request->hasil]);
+        
+        // $siswa = Siswa::findOrFail($id);
+
+        // $siswa->mapel()->updateExistingPivot($request->mapel, ['nilai' => $request->nilai]);
+
+        // dd($siswa);
+
+        return redirect('siswa/'.$id.'/nilai')->with('status', 'Nilai Berhasil Ditambahkan');
+    }
+
     public function editproject($id, $idproject)
     {
         $item = Siswa::findOrFail($id);
@@ -163,24 +214,6 @@ class NilaiController extends Controller
             'item' => $item,
             'pro' => $pro
         ]);
-    }
-
-    public function nilaiupdateproject(Request $request, $id, $idproject)
-    {
-        $item = Siswa::findOrFail($id);
-        $pro = Project::findOrFail($idproject);
-        $pro->siswa_id = $item->id;
-        $pro->project = $request->project;
-        $pro->nilai_pro = $request->nilai_pro;
-        $pro->pengerjaan = $request->task;
-        $pro->hasil = $request->hasil;
-        $pro->save();
-
-        // $siswa->mapel()->updateExistingPivot($request->mapel, ['nilai' => $request->nilai]);
-        // dd($pro);
-
-
-        return redirect('siswa/'.$id.'/nilai')->with('status', 'Nilai Berhasil Ditambahkan');
     }
 
     public function nilaihapus($id, $idmapel)

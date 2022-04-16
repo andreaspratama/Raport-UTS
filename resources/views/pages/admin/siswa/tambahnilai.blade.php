@@ -19,9 +19,9 @@
                       <a href="/guru/nilaiProsesKelas/{{$item->kelas}}" class="btn btn-secondary btn-sm">Kembali Ke Kelas</a>
                       <br>
                       <br>
-                      <button type="button" class="btn btn-primary mb-3 btn-sm" data-toggle="modal"data-target="#exampleModal">
+                      {{-- <button type="button" class="btn btn-primary mb-3 btn-sm" data-toggle="modal"data-target="#exampleModal">
                           Tambah Nilai
-                      </button>
+                      </button> --}}
                       <h3 class="text-primary" style="font-weight: bold">Soft Skills Project</h3>
                       <div class="table-responsive">
                         <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0">
@@ -85,9 +85,9 @@
                           </tbody>
                         </table>
                       </div>
-                      <button type="button" class="btn btn-primary mb-3 btn-sm" data-toggle="modal"data-target="#project">
+                      {{-- <button type="button" class="btn btn-primary mb-3 btn-sm" data-toggle="modal"data-target="#project">
                         Tambah Nilai
-                      </button>
+                      </button> --}}
                       <h3 class="text-primary" style="font-weight: bold">Project</h3>
                       <div class="table-responsive">
                         <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0">
@@ -101,14 +101,51 @@
                             </tr>
                           </thead>
                           <tbody>
-                              @foreach ($projects as $p)
+                            @foreach ($projects as $p)
+                              <tr>
+                                <td>
+                                  {{$p->nama}}
+                                </td>
+                                <td>
+                                  @foreach ($item->project as $pro)
+                                      @if ($p->id === $pro->pivot->project_id)
+                                        {{$pro->pivot->nilai}}
+                                          {{-- {{$ma->pivot->nilai}} --}}
+                                      {{-- @elseif ($m->id === $ma->pivot->mapel_id)
+                                          {{$ma->pivot->nilai}}
+                                      @elseif ($m->id === $ma->pivot->mapel_id)
+                                          {{$ma->pivot->nilai}}
+                                      @elseif ($m->id === $ma->pivot->mapel_id)
+                                          {{$ma->pivot->nilai}}
+                                      @elseif ($m->id === $ma->pivot->mapel_id)
+                                          {{$ma->pivot->nilai}} --}}
+                                      @endif
+                                  @endforeach
+                                </td>
+                                <td>
+                                  @foreach ($item->project as $pro)
+                                    {{$pro->pivot->task}}
+                                  @endforeach
+                                </td>
+                                <td>
+                                  @foreach ($item->project as $pro)
+                                    {{$pro->pivot->hasil}}
+                                  @endforeach
+                                </td>
+                                <td>
+                                  <a href="/siswa/{{$item->id}}/{{$p->id}}/nilaitambahproject" class="btn btn-primary btn-sm">Input Nilai</a>
+                                  <a href="/siswa/{{$item->id}}/{{$p->id}}/nilaieditproject" class="btn btn-sm btn-warning">Edit Nilai</a>
+                                </td>
+                              </tr>
+                            @endforeach
+                              {{-- @foreach ($projects as $p)
                                 <tr>
                                   <td>{{$p->project}}</td>
                                   <td>{{$p->nilai_pro}}</td>
                                   <td>{{$p->pengerjaan}}</td>
                                   <td><a href="{{$p->hasil}}">Klik Disini</a></td>
                                   <td>
-                                    <a href="/edit/{{$p->siswa->id}}/{{$p->id}}/project" class="btn btn-primary btn-sm btn-warning">Edit</a>
+                                    <a href="/edit/{{$p->siswa->id}}/{{$p->id}}/project" class="btn btn-primary btn-sm btn-warning">Edit</a> --}}
                                     {{-- <a href="/siswa/{{$item->id}}/{{$mapel->id}}/nilaitambah" class="btn btn-primary btn-sm">Tambah / Edit</a> --}}
                                     {{-- <a href="/siswa/{{$item->id}}/{{$mapel->id}}/hapus" class="btn btn-danger btn-sm">Hapus</a> --}}
                                     {{-- <form action="/siswa/{{$item->id}}/{{$mapel->id}}/nilaihapus" method="post" class="btn btn-danger btn-sm d-inline">
@@ -116,9 +153,9 @@
                                       @method('delete')
                                       Hapus
                                     </form> --}}
-                                  </td>
+                                  {{-- </td>
                                 </tr>
-                              @endforeach
+                              @endforeach --}}
                           </tbody>
                         </table>
                       </div>
