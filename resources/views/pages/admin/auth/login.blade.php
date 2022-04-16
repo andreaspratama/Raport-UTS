@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Login | SD IT Bunayya</title>
+  <title>Login | Project YSKI</title>
   <link rel="shortcut icon" href="{{url('../../foto/yski.png')}}">
 
   <!-- Custom fonts for this template-->
