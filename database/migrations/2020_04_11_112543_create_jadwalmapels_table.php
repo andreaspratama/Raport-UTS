@@ -16,7 +16,6 @@ class CreateJadwalmapelsTable extends Migration
         Schema::create('jadwalmapels', function (Blueprint $table) {
             $table->id();
             $table->integer('guru_id');
-            $table->integer('mapel_id');
             $table->string('unit');
             $table->string('kelas');
             $table->timestamps();

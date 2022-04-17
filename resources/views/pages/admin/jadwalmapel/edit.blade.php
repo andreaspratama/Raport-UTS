@@ -31,20 +31,6 @@
                     @endforeach
                   </select>
                 </div>
-                <label for="mapel_id">Mapel</label>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="mapels_id"><i class="fas fa-book-reader"></i></span>
-                  </div>
-                  <select class="custom-select" name="mapel_id">
-                    <option value="{{$item->mapel_id}}">-- Ubah Bila Perlu --</option>
-                    @foreach ($mapels as $mapels)
-                        <option value="{{$mapels->id}}">
-                          {{$mapels->nama_mapel}}
-                        </option>
-                    @endforeach
-                  </select>
-                </div>
                 <div class="form-group">
                   <label for="kelas">Kelas</label>
                   <div class="input-group">
