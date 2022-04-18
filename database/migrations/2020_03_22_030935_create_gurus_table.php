@@ -17,6 +17,7 @@ class CreateGurusTable extends Migration
             $table->id();
             $table->bigInteger('nip');
             $table->string('nama');
+            $table->text('ttd');
             $table->timestamps();
         });
     }

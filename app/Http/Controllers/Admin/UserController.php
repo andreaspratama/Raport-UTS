@@ -51,9 +51,6 @@ class UserController extends Controller
         $user->password = bcrypt($request->password);
         $user->remember_token = Str::random(60);
         $user->role = $request->role;
-        $user->image = $request->file('image')->store(
-            'assets/gallery', 'public'
-        );
         $user->save();
 
         return redirect()->route('user.index')->with('status', 'Data Berhasil Ditambahkan');

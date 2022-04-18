@@ -72,15 +72,6 @@
                     </select>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="image">Foto</label>
-                  <input type="file" class="form-control-file @error('password') is-invalid @enderror" name="image">
-                  @error('image')
-                    <div class="invalid-feedback">
-                      {{$message}}
-                    </div>
-                  @enderror
-                </div>
                 <button type="submit" class="btn btn-success btn-sm">Simpan</button>
                 <button type="reset" class="btn btn-warning btn-sm">Reset</button>
                 <a href="{{route('user.index')}}" class="btn btn-secondary btn-sm">Kembali</a>

@@ -32,6 +32,7 @@
                     <th>No</th>
                     <th>Nip</th>
                     <th>Nama</th>
+                    <th>TTD</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -41,6 +42,9 @@
                         <td>{{$loop->iteration}}</td>
                         <td>{{$item->nip}}</td>
                         <td>{{$item->nama}}</td>
+                        <td>
+                          <img src="{{Storage::url($item->ttd)}}" width="150px" alt="">
+                        </td>
                         <td>
                             <a href="/guru/{{$item->id}}/edit" class="btn btn-circle btn-warning btn-sm">
                                 <i class="fa fa-edit"></i>

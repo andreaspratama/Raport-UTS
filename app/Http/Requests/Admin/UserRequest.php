@@ -27,8 +27,7 @@ class UserRequest extends FormRequest
             'name' => 'required',
             'username' => 'required',
             'password' => 'required|min:3',
-            'role' => 'required',
-            'image' => 'required'
+            'role' => 'required'
         ];
     }
 
@@ -39,8 +38,7 @@ class UserRequest extends FormRequest
             'username.required' => 'Username tidak boleh kosong',
             'password.min' => 'Password minimal 3 karakter',
             'password.required' => 'Password tidak boleh kosong',
-            'role.required' => 'Role tidak boleh kosong',
-            'image.required' => 'Foto tidak boleh kosong'
+            'role.required' => 'Role tidak boleh kosong'
         ];
     }
 }

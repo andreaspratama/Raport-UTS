@@ -44,6 +44,15 @@
                   @enderror
                 </div>
               </div>
+              <div class="form-group">
+                <label for="ttd">TTD</label>
+                <input type="file" class="form-control-file @error('ttd') is-invalid @enderror" name="ttd">
+                @error('ttd')
+                  <div class="invalid-feedback">
+                    {{$message}}
+                  </div>
+                @enderror
+              </div>
               <button type="submit" class="btn btn-success btn-sm">Simpan</button>
               <button type="reset" class="btn btn-warning btn-sm">Reset</button>
               <a href="/guru" class="btn btn-secondary btn-sm">Kembali</a>

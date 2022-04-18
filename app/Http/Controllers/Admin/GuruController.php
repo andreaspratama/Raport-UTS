@@ -63,6 +63,9 @@ class GuruController extends Controller
         // insert table
         $request->request->add(['user_id' => $user->id]);
         $data = $request->all();
+        $data['ttd'] = $request->file('ttd')->store(
+            'assets/gallery-ttd-guru', 'public'
+        );
         
         Guru::create($data);
 

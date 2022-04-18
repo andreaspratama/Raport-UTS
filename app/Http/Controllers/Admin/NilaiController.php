@@ -236,16 +236,18 @@ class NilaiController extends Controller
         // $html2pdf = new Html2Pdf('P', 'A4', 'en');
         // $html2pdf->writeHtml(view('export.cetakNilaiSiswapdf'));
         // $html2pdf->output();   
-        // $item = Siswa::findOrFail($id);
-        // $item = Siswa::findOrFail($id);
-        // $matapelajarans = Mapel::all();
-        // $sekolah = Sekolah::all();
-        // $projects = Project::all();
+        $item = Siswa::findOrFail($id);
+        $mapel = Mapel::all();
+        $thnakademiks = Thnakademik::all();
+        $projects = Project::all();
+        $sekolah = Sekolah::all();
+        $tanggal = date("d-m-Y");
 
         // return view('pages.admin.siswa.new', compact('cetakPeraka', 'data', 'matapelajarans'));
 
-        // $pdf = PDF::loadview('export.cetakNilaiSiswapdf', compact('matapelajarans', 'item', 'sekolah', 'projects'));
+        $pdf = PDF::loadview('export.cetakNilaiSiswapdf', compact('mapel', 'item', 'sekolah', 'projects', 'thnakademiks', 'tanggal'));
         // return $pdf->download('laporan-absen.pdf');
+        return $pdf->stream();
     }
 
     public function cetakNilaiIndividu($id, $idmapel)

@@ -21,6 +21,7 @@ class GuruImport implements ToModel
         return new Guru([
             'nama' => $row[1],
             'nip' => $row[0],
+            'ttd' => $row[2],
             'user_id' => $user->id ?? NULL,
         ]);
     }

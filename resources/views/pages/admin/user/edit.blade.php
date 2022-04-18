@@ -59,11 +59,6 @@
                     </select>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="image">Foto</label>
-                  <input type="file" class="form-control-file" name="image">
-                  <p class="text-danger">Masukan Foto Bila Perlu</p>
-                </div>
                 <button type="submit" class="btn btn-success btn-sm">Simpan</button>
                 <button type="reset" class="btn btn-warning btn-sm">Reset</button>
                 <a href="{{route('user.index')}}" class="btn btn-secondary btn-sm">Kembali</a>
