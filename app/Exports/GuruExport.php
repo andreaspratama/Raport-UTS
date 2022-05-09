@@ -22,11 +22,7 @@ class GuruExport implements FromCollection, WithMapping, WithHeadings
         return [
             $guru->nip,
             $guru->nama,
-            $guru->tpt_lahir,
-            $guru->tgl_lahir,
-            $guru->jns_kelamin,
-            $guru->agama,
-            $guru->alamat,
+            $guru->ttd,
         ];
     }
 
@@ -35,11 +31,7 @@ class GuruExport implements FromCollection, WithMapping, WithHeadings
         return [
             'NIP',
             'Nama',
-            'Tempat Lahir',
-            'Tanggal Lahir',
-            'Jenis Kelamin',
-            'Agama',
-            'Alamat',
+            'TTD',
         ];
     }
 }

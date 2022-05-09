@@ -8,7 +8,7 @@ use PDF;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\JadwalmapelRequest;
 use App\Jadwalmapel;
-use App\Imports\JadmapImport;
+use App\Imports\JadwalImport;
 use App\Mapel;
 use App\Guru;
 use App\Ruang;
@@ -156,7 +156,7 @@ class JadwalmapelController extends Controller
         $namaFile = $file->getClientOriginalName();
         $file->move('DataJadwalmapel', $namaFile);
 
-        Excel::import(new JadmapImport, public_path('/DataJadwalmapel/'.$namaFile));
+        Excel::import(new JadwalImport, public_path('/DataJadwalmapel/'.$namaFile));
 
         return redirect('/jadwalmapel')->with('status', 'Data Berhasil Ditambahkan');
     }

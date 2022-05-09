@@ -62,7 +62,10 @@
   <body>
       <header>
         <center>
-            <img src="foto/logo-putih.png" alt="">
+            <?php
+                $logos = storage_path("app/public/assets/gallery/logo-putih.png")
+            ?>
+            <img src="{{$logos}}" alt="">
         </center>
         <center>
             <div class="text-head-title">
@@ -86,6 +89,14 @@
                     <br>
                     <div class="unit-text">
                         Jl. Sidodadi Timur No. 23
+                    </div>
+                @elseif($item->unit === 'K1')
+                    <div class="unit">
+                        SD Kristen 1 YSKI Semarang
+                    </div>
+                    <br>
+                    <div class="unit-text">
+                        Jl. Kompol Maksum No. 280 Semarang
                     </div>
                 @endif
             </div>
@@ -117,7 +128,7 @@
         <thead>
             <tr class="bg-primary text-white">
                 <th width="4%">No</th> 
-                <th width="23%">Mapel</th>
+                <th width="23%">Aspek</th>
                 <th width="6%">Nilai</th>
                 <th>Deskripsi</th>
             </tr>
@@ -222,7 +233,11 @@
     <footer>
         <div class="ttd mt-5" style="text-align: right">
             <p style="margin-right: 30px">Semarang, {{$tanggal}}</p>
-            <p style="margin-right: 25px"><img src="foto/ttd.jpg" alt=""></p>
+            <?php
+                // $j = ;
+                $foto = storage_path("app/public/" . Auth::user()->guru->ttd);
+            ?>
+            <p style="margin-right: 25px"><img src="{{$foto}}" alt=""></p>
             <p style="margin-top: -15px; margin-right: 30px">{{Auth::user()->name}}</p>
         </div>
     </footer>

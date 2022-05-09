@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Guru extends Model
 {
     protected $fillable = [
-        'nip', 'nama', 'user_id', 'ttd'
+        'email', 'nama', 'user_id', 'ttd'
     ];
 
     protected $hidden = [];

@@ -11,12 +11,19 @@ class UserImport implements ToModel
     public function model(array $row)
     {
         $rem = Str::random(60);
+        
+        if ($row[2] === 'siswa') {
+            $pass = $row[1];
+        } elseif ($row[2] === 'guru') {
+            $pass = 'guru123**';
+        }
+        
         return new User([
-            'name' => $row[1],
-            'username' => $row[2],
-            'password' => bcrypt($row[2]),
+            'name' => $row[0],
+            'username' => $row[1],
+            'password' => bcrypt($pass),
             'remember_token' => $rem,
-            'role' => $row[3]
+            'role' => $row[2]
         ]);
     }
 }

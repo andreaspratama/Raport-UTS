@@ -14,7 +14,7 @@ use App\Project;
 use Illuminate\Http\Request;
 use PDF;
 use App\Exports\AbsensiswaExport;
-use Spipu\Html2Pdf\Html2pdf;
+use Spipu\Html2Pdf\Html2Pdf;
 
 class NilaiController extends Controller
 {
@@ -67,6 +67,10 @@ class NilaiController extends Controller
         // $siswa['portofolio'] = $request->file('portofolio')->store(
         //     'assets/porto', 'public'
         // );
+        
+        // if($siswa->mapel()->where('siswa_id', $id->exists())) {
+            
+        // }
         
         $siswa->mapel()->attach($request->mapel, ['thnakademik' => $request->thnakademik, 'nilai' => $request->nilai, 'project' => $request->project, 'nilai_pro' => $request->nilai_pro, 'task' => $request->task, 'hasil' => $request->hasil]);
 
@@ -186,7 +190,7 @@ class NilaiController extends Controller
 
         // dd($siswa);
 
-        return redirect('siswa/'.$id.'/nilai')->with('status', 'Nilai Berhasil Ditambahkan');
+        return redirect('siswa/'.$id.'/nilai')->with('status', 'Nilai Berhasil Diubah');
     }
 
     public function editnilaiupdateproject(Request $request, $id, $idproject)
@@ -202,7 +206,7 @@ class NilaiController extends Controller
 
         // dd($siswa);
 
-        return redirect('siswa/'.$id.'/nilai')->with('status', 'Nilai Berhasil Ditambahkan');
+        return redirect('siswa/'.$id.'/nilai')->with('status', 'Nilai Berhasil Diubah');
     }
 
     public function editproject($id, $idproject)
@@ -233,9 +237,9 @@ class NilaiController extends Controller
 
     public function cetakNilaiPeraka($id)
     {
-        // $html2pdf = new Html2Pdf('P', 'A4', 'en');
-        // $html2pdf->writeHtml(view('export.cetakNilaiSiswapdf'));
-        // $html2pdf->output();   
+        // $html = new Html2Pdf('P', 'A4', 'en');
+        // $html->writeHTML(view('export.cetakNilaiSiswapdf'));
+        // $html->output('daftarnilai.pdf');
         $item = Siswa::findOrFail($id);
         $mapel = Mapel::all();
         $thnakademiks = Thnakademik::all();
@@ -243,9 +247,7 @@ class NilaiController extends Controller
         $sekolah = Sekolah::all();
         $tanggal = date("d-m-Y");
 
-        // return view('pages.admin.siswa.new', compact('cetakPeraka', 'data', 'matapelajarans'));
-
-        $pdf = PDF::loadview('export.cetakNilaiSiswapdf', compact('mapel', 'item', 'sekolah', 'projects', 'thnakademiks', 'tanggal'));
+        $pdf = \PDF::loadview('export.cetakNilaiSiswapdf', compact('mapel', 'item', 'sekolah', 'projects', 'thnakademiks', 'tanggal'));
         // return $pdf->download('laporan-absen.pdf');
         return $pdf->stream();
     }

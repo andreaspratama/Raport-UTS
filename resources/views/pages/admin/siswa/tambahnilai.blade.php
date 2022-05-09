@@ -9,13 +9,13 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Detail Nilai Siswa {{$item->nama}}</h1>
+        <h1 class="h3 mb-2 text-gray-800">Tambah Nilai Siswa {{$item->nama}}</h1>
 
         <div class="card shadow">
             <div class="card-body">
                 <div class="card shadow mb-4">
                     <div class="card-body">
-                      <a href="/cetakNilai/{{$item->id}}/cetakProses" class="btn btn-primary btn-sm">Cetak Nilai {{$item->nama}}</a>
+                      <a href="/cetakNilai/{{$item->id}}/cetakProses" class="btn btn-primary btn-sm">Download Nilai PDF {{$item->nama}}</a>
                       <a href="/guru/nilaiProsesKelas/{{$item->kelas}}" class="btn btn-secondary btn-sm">Kembali Ke Kelas</a>
                       <br>
                       <br>
@@ -27,7 +27,7 @@
                         <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0">
                           <thead>
                             <tr>
-                              <th>Mapel</th>
+                              <th>Aspek</th>
                               <th>Nilai</th>
                               <th>Deskripsi</th>
                               <th>Aksi</th>
@@ -77,8 +77,13 @@
                                 @endif
                               </td>
                               <td>
-                                <a href="/siswa/{{$item->id}}/{{$m->id}}/nilaitambah" class="btn btn-primary btn-sm">Input Nilai</a>
-                                <a href="/siswa/{{$item->id}}/{{$m->id}}/nilaiedit" class="btn btn-sm btn-warning">Edit Nilai</a>
+                                @if ($item->mapel()->where('mapel_id', $m->id)->exists())
+                                    <a href="/siswa/{{$item->id}}/{{$m->id}}/nilaiedit" class="btn btn-sm btn-warning">Edit Nilai</a>
+                                @else
+                                    <a href="/siswa/{{$item->id}}/{{$m->id}}/nilaitambah" class="btn btn-primary btn-sm">Input Nilai</a>
+                                @endif
+                                <!--<a href="/siswa/{{$item->id}}/{{$m->id}}/nilaitambah" class="btn btn-primary btn-sm">Input Nilai</a>-->
+                                <!--<a href="/siswa/{{$item->id}}/{{$m->id}}/nilaiedit" class="btn btn-sm btn-warning">Edit Nilai</a>-->
                               </td>
                             </tr>
                             @endforeach
@@ -129,12 +134,15 @@
                                 </td>
                                 <td>
                                   @foreach ($item->project as $pro)
-                                    {{$pro->pivot->hasil}}
+                                    <a href="{{$pro->pivot->hasil}}">Klik Disini Untuk Melihat</a>
                                   @endforeach
                                 </td>
                                 <td>
-                                  <a href="/siswa/{{$item->id}}/{{$p->id}}/nilaitambahproject" class="btn btn-primary btn-sm">Input Nilai</a>
-                                  <a href="/siswa/{{$item->id}}/{{$p->id}}/nilaieditproject" class="btn btn-sm btn-warning">Edit Nilai</a>
+                                    @if ($item->project()->where('project_id', $p->id)->exists())
+                                        <a href="/siswa/{{$item->id}}/{{$p->id}}/nilaieditproject" class="btn btn-sm btn-warning">Edit Nilai</a>
+                                    @else
+                                        <a href="/siswa/{{$item->id}}/{{$p->id}}/nilaitambahproject" class="btn btn-primary btn-sm">Input Nilai</a>
+                                    @endif
                                 </td>
                               </tr>
                             @endforeach
@@ -161,7 +169,7 @@
                       </div>
                     </div>
                 </div>
-                {{-- <a href="/guru/nilaiProsesKelas/{{$item->kelas}}" class="btn btn-secondary btn-sm">Kembali</a> --}}
+                <a href="/guru/nilaiProsesKelas/{{$item->kelas}}" class="btn btn-secondary btn-sm">Kembali Ke Kelas</a>
             </div>
         </div>
 
@@ -375,14 +383,15 @@
       <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
       {{-- <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> --}}
       <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
       <script>
         $(document).ready(function() {
           $('.nilai').DataTable();
         } );
       </script>
       <script>
-        @if (Session::has('project'))
-          toastr.success("{{Session::get('project')}}", "Trimakasih")
+        @if (Session::has('status'))
+          toastr.success("{{Session::get('status')}}", "Trimakasih")
         @endif
 
         // $.fn.editable.defaults.mode = 'inline';

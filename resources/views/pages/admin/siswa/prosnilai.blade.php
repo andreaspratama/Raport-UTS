@@ -46,9 +46,9 @@
                                   <i class="fa fa-trash"></i>
                               </button>
                           </form> --}}
-                          <a href="/siswa/{{$pn->id}}/detail" class="btn btn-sm btn-success">
+                          {{-- <a href="/siswa/{{$pn->id}}/detail" class="btn btn-sm btn-success">
                             Detail
-                          </a>
+                          </a> --}}
                         </td>
                     </tr>
                   @endforeach

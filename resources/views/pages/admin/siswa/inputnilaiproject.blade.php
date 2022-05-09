@@ -21,7 +21,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="nama"><i class="far fa-id-card"></i></span>
                     </div>
-                    <input type="text" class="form-control @error('nama') is-invalid @enderror" placeholder="nama" name="nama" value="{{$project->nama}}">
+                    <input type="text" class="form-control @error('nama') is-invalid @enderror" placeholder="nama" name="nama" value="{{$project->nama}}" disabled>
                     @error('nama')
                       <div class="invalid-feedback">
                           {{$message}}

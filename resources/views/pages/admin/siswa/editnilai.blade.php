@@ -21,7 +21,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="mapel"><i class="far fa-id-card"></i></span>
                     </div>
-                    <input type="text" class="form-control @error('mapel') is-invalid @enderror" placeholder="Mapel" name="mapel" value="{{$mapel->nama_mapel}}">
+                    <input type="text" class="form-control @error('mapel') is-invalid @enderror" placeholder="Mapel" name="mapel" value="{{$mapel->nama_mapel}}" disabled>
                     @error('mapel')
                       <div class="invalid-feedback">
                           {{$message}}

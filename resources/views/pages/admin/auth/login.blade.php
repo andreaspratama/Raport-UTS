@@ -43,12 +43,12 @@
                     <img src="{{url('../../foto/yski.png')}}" alt="" style="width: 120px">
                   </div>
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Sistem Penilaian YSKI</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Project Based Report YSKI</h1>
                   </div>
                   <form class="user" method="POST" action="/postlogin">
                     @csrf
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Masukan Username (NISN / NIP)" name="username">
+                      <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Masukan Username" name="username">
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Masukan Password" name="password">

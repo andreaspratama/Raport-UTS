@@ -71,11 +71,6 @@
           <i class="fas fa-book-reader"></i>
           <span>Nilai</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/guru/profile">
-          <i class="fas fa-book-reader"></i>
-          <span>Profile</span></a>
-      </li>
     @endif
 
     {{-- @if(auth()->user()->role == 'siswa')

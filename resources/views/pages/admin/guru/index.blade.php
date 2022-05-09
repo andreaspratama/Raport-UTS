@@ -30,7 +30,7 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Nip</th>
+                    <th>Email</th>
                     <th>Nama</th>
                     <th>TTD</th>
                     <th>Aksi</th>
@@ -40,7 +40,7 @@
                   @foreach($items as $item)
                     <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td>{{$item->nip}}</td>
+                        <td>{{$item->email}}</td>
                         <td>{{$item->nama}}</td>
                         <td>
                           <img src="{{Storage::url($item->ttd)}}" width="150px" alt="">

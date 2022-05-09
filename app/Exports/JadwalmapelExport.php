@@ -24,40 +24,20 @@ class JadwalmapelExport implements FromCollection, WithMapping, WithHeadings
         } else {
             $rguru = $jadwalmapel->guru->nama;
         }
-
-        if ($jadwalmapel->mapel == null) {
-            $rmapel = "Mapel Terhapus";
-        } else {
-            $rmapel = $jadwalmapel->mapel->nama_mapel;
-        }
-
-        if ($jadwalmapel->ruang == null) {
-            $rruang = "Ruang Terhapus";
-        } else {
-            $rruang = $jadwalmapel->ruang->nama_ruang;
-        }
         
         return [
-            $rmapel,
             $rguru,
             $jadwalmapel->kelas,
-            $rruang,
-            $jadwalmapel->hari,
-            $jadwalmapel->jam_mulai,
-            $jadwalmapel->jam_selesai,
+            $jadwalmapel->unit,
         ];
     }
 
     public function headings(): array
     {
         return [
-            'Nama Mapel',
             'Nama Guru',
             'Kelas',
-            'Ruang',
-            'Hari',
-            'Jam Mulai',
-            'Jam Selesai',
+            'Unit',
         ];
     }
 }

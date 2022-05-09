@@ -24,7 +24,7 @@ class GuruRequest extends FormRequest
     public function rules()
     {
         return [
-            'nip' => 'required|unique:gurus,nip',
+            'email' => 'required|unique:gurus,email',
             'nama' => 'required|string|min:3'
         ];
     }
@@ -32,8 +32,8 @@ class GuruRequest extends FormRequest
     public function messages()
     {
         return [
-            'nip.unique' => 'NIP sudah digunakan',
-            'nip.required' => 'NIP tidak boleh kosong',
+            'email.unique' => 'Email sudah digunakan',
+            'email.required' => 'Email tidak boleh kosong',
             'nama.required' => 'Nama tidak boleh kosong',
             'nama.min' => 'Nama minimal 3 karakter',
             'nama.string' => 'Nama harus huruf'

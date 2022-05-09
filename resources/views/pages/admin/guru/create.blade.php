@@ -17,13 +17,13 @@
             <form action="/guru/store" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="form-group">
-                <label for="nip">Nip</label>
+                <label for="email">Email</label>
                 <div class="input-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="nip"><i class="far fa-id-card"></i></span>
+                    <span class="input-group-text" id="email"><i class="far fa-id-card"></i></span>
                   </div>
-                  <input type="text" class="form-control @error('nip') is-invalid @enderror" placeholder="Nip" name="nip" value="{{old('nip')}}">
-                  @error('nip')
+                  <input type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{old('email')}}">
+                  @error('email')
                     <div class="invalid-feedback">
                         {{$message}}
                     </div>

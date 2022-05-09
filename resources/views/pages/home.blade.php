@@ -41,11 +41,7 @@
                     @if (auth()->user()->role == 'guru')
                         <h1 class="mb-3">
                             @if (auth()->user()->role == 'guru')
-                                @if (auth()->user()->guru->jns_kelamin == 'L')
-                                    Selamat Datang Bapak {{auth()->user()->name}}
-                                @else
-                                    Selamat Datang Ibu {{auth()->user()->name}}
-                                @endif
+                                Selamat Datang {{auth()->user()->name}}
                             @endif
                             @if (auth()->user()->role == 'siswa')   
                                 Selamat Datang {{auth()->user()->name}}
@@ -53,20 +49,20 @@
                         </h1>
                         <p class="mb-5">
                             @if (auth()->user()->role == 'guru')
-                                Selamat Datang di Sistem Informasi Akademik SD IT Bunayya Semarang <br>
+                                Selamat Datang di Project Based Report YSKI <br>
                                 {{-- @if (auth()->user()->role == 'guru')
                                     <a href="{{route('dashboard.guru')}}" class="btn btn-primarmt-3">Masuk Dashboard</a>
                                 @endif --}}
                             @endif
                             {{-- @if (auth()->user()->role == 'siswa')
-                                Selamat Datang di Sistem Informasi Akademik SD IT Bunayya Semarang <br>
+                                Selamat Datang di Project Based Report YSKI <br>
                             @endif --}}
                         </p>
                     @endif
                 </div>
                 <div class="col d-none d-sm-none d-md-block">
                     @if (auth()->user()->role == 'guru')
-                        <img width="450" src="frontend/images/pend.jpg" alt="">
+                        <img width="450" src="../frontend/images/pend.jpg" alt="">
                     @endif
                     {{-- @if (auth()->user()->role == 'siswa')
                         <img width="450" src="frontend/images/pend.jpg" alt="">

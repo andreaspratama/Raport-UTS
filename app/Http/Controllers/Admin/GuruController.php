@@ -55,8 +55,8 @@ class GuruController extends Controller
         $user = new User;
         $user->role = 'guru';
         $user->name = $request->nama;
-        $user->username = $request->nip;
-        $user->password = bcrypt($request->nip);
+        $user->username = $request->email;
+        $user->password = bcrypt('guru123**');
         $user->remember_token = Str::random(60);
         $user->save();
 
@@ -115,19 +115,14 @@ class GuruController extends Controller
         $update_guru = $data->user_id;
 
         $data->update([
-            'nip' => $request->nip,
+            'email' => $request->email,
             'nama' => $request->nama,
-            'tpt_lahir' => $request->tpt_lahir,
-            'tgl_lahir' => $request->tgl_lahir,
-            'jns_kelamin' => $request->jns_kelamin,
-            'agama' => $request->agama,
-            'alamat' => $request->alamat
         ]);
 
         $baru = User::find($update_guru);
         $baru->name = $request->nama;
-        $baru->username = $request->nip;
-        $baru->password = bcrypt($request->nip);
+        $baru->username = $request->email;
+        $baru->password = bcrypt('guru123**');
         $baru->remember_token = Str::random(60);
         $baru->save();
         // $request->validate([

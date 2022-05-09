@@ -78,7 +78,7 @@ Route::prefix('/')
             Route::post('jadwalmapel/{jadwalmapel}/nilai', 'JadwalmapelController@nilai');
             Route::get('jadwalmapel/exportexcel', 'JadwalmapelController@exportExcel');
             Route::get('jadwalmapel/exportpdf', 'JadwalmapelController@exportPdf');
-            Route::post('jadwalmapel/importexcel', 'JadwalmapelController@importExcel')->name('importexcel');
+            Route::post('jadwalmapel/importexcel', 'JadwalmapelController@importExcel')->name('importexceljadwalmapel');
     
             Route::get('mapel/{mapel}/hapus', 'MapelController@hapus');
             Route::resource('mapel', 'MapelController');

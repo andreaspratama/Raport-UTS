@@ -9,24 +9,20 @@ use Maatwebsite\Excel\Concerns\ToModel;
 
 class JadmapImport implements ToModel
 {
-    private $mapel;
     private $guru;
 
     public function __construct()
     {
-        $this->mapel = Mapel::select('id', 'kode_mapel', 'nama_mapel')->get();
         $this->guru = Guru::select('id', 'nama', 'nip')->get();
     }
 
     public function model(array $row)
     {
-        $mapel = $this->mapel->where('nama_mapel', $row[2])->first();
-        $guru = $this->guru->where('nama', $row[1])->first();
+        $guru = $this->guru->where('nama', $row[0])->first();
         return new Jadwalmapel([
+            'unit' => $row[2],
+            'kelas' => $row[1],
             'guru_id' => $guru->id ?? NULL,
-            'mapel_id' => $mapel->id ?? NULL,
-            'unit' => $row[3],
-            'kelas' => $row[4],
         ]);
     }
 }
