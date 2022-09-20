@@ -70,74 +70,74 @@
       </header>
       <table style="margin-top: 50px; width: 60%; position:absolute;">
         <tr>
-            <td style="font-weight: bold; width:128px">Nama Siswa</td>
-            <td style="font-weight: bold; width:10px">:</td>
-            <td style="font-weight: bold">{{$item->nama}}</td>
+            <td style="font-weight: bold; width:128px; font-size:14px">Nama Siswa</td>
+            <td style="font-weight: bold; width:10px; font-size:14px">:</td>
+            <td style="font-weight: bold; font-size:14px">{{$item->nama}}</td>
         </tr>
         <tr>
-            <td style="font-weight: bold">Nomor Induk</td>
-            <td style="font-weight: bold">:</td>
-            <td style="font-weight: bold">{{$item->nisn}}</td>
+            <td style="font-weight: bold; font-size:14px">Nomor Induk</td>
+            <td style="font-weight: bold; font-size:14px">:</td>
+            <td style="font-weight: bold; font-size:14px">{{$item->nisn}}</td>
         </tr>
         <tr>
-            <td style="font-weight: bold">Nama Sekolah</td>
-            <td style="font-weight: bold">:</td>
+            <td style="font-weight: bold; font-size:14px">Nama Sekolah</td>
+            <td style="font-weight: bold; font-size:14px">:</td>
             @if ($item->unit == 'K1')
-                <td style="font-weight: bold">SD Kristen 1 YSKI</td>
+                <td style="font-weight: bold; font-size:14px">SD Kristen 1 YSKI</td>
             @elseif($item->unit == 'K2')
-                <td style="font-weight: bold">SD Kristen 2 YSKI</td>
+                <td style="font-weight: bold; font-size:14px">SD Kristen 2 YSKI</td>
             @elseif($item->unit == 'K3')
-                <td style="font-weight: bold">SD Kristen 3 YSKI</td>
+                <td style="font-weight: bold; font-size:14px">SD Kristen 3 YSKI</td>
             @endif
         </tr>
         <tr>
-            <td style="font-weight: bold">Alamat Sekolah</td>
-            <td style="font-weight: bold">:</td>
+            <td style="font-weight: bold; font-size:14px">Alamat Sekolah</td>
+            <td style="font-weight: bold; font-size:14px">:</td>
             @if ($item->unit == 'K1')
-                <td style="font-weight: bold">Jl. Kompol Maksum No.280 Semarang</td>
+                <td style="font-weight: bold; font-size:14px">Jl. Kompol Maksum No.280 Semarang</td>
             @elseif($item->unit == 'K2')
-                <td style="font-weight: bold">Jl. Dokter Cipto No.109 Semarang</td>
+                <td style="font-weight: bold; font-size:14px">Jl. Dokter Cipto No.109 Semarang</td>
             @elseif($item->unit == 'K3')
-                <td style="font-weight: bold">Jl. Tanjung No.14 Semarang</td>
+                <td style="font-weight: bold; font-size:14px">Jl. Tanjung No.14 Semarang</td>
             @endif
         </tr>
       </table>
       <table style="margin-top: 28px; position: absolute; width: 40%;" align="right">
             <tr>
-                <td style="font-weight: bold; width:130px">Kelas</td>
-                <td style="font-weight: bold; width:10px">:</td>
+                <td style="font-weight: bold; width:130px; font-size:14px">Kelas</td>
+                <td style="font-weight: bold; width:10px; font-size:14px">:</td>
                 @if ($item->kelas == '4A')
-                    <td style="font-weight: bold">IVA (empat)</td>
+                    <td style="font-weight: bold; font-size:14px">IVA (empat)</td>
                 @elseif($item->kelas == '4B')
-                    <td style="font-weight: bold">IVB (empat)</td>
+                    <td style="font-weight: bold; font-size:14px">IVB (empat)</td>
                 @elseif($item->kelas == '4C')
-                    <td style="font-weight: bold">IVC (empat)</td>
+                    <td style="font-weight: bold; font-size:14px">IVC (empat)</td>
                 @elseif($item->kelas == '1A')
-                    <td style="font-weight: bold">IA (satu)</td>
+                    <td style="font-weight: bold; font-size:14px">IA (satu)</td>
                 @elseif($item->kelas == '1B')
-                    <td style="font-weight: bold">IB (satu)</td>
+                    <td style="font-weight: bold; font-size:14px">IB (satu)</td>
                 @endif
             </tr>
             <tr>
-                <td style="font-weight: bold">Semester</td>
-                <td style="font-weight: bold">:</td>
-                <td style="font-weight: bold">1 (Satu)</td>
+                <td style="font-weight: bold; font-size:14px">Semester</td>
+                <td style="font-weight: bold; font-size:14px">:</td>
+                <td style="font-weight: bold; font-size:14px">1 (Satu)</td>
             </tr>
             <tr>
                 @foreach ($thnakademiks as $akdm)
                     @if ($akdm->status == 'Aktif')
-                        <td style="font-weight: bold">Tahun Pelajaran</td>
-                        <td style="font-weight: bold">:</td>
-                        <td style="font-weight: bold">{{$akdm->tahun_akademik}}</td>
+                        <td style="font-weight: bold; font-size:14px">Tahun Pelajaran</td>
+                        <td style="font-weight: bold; font-size:14px">:</td>
+                        <td style="font-weight: bold; font-size:14px">{{$akdm->tahun_akademik}}</td>
                     @endif
                 @endforeach
             </tr>
       </table>
-      <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0" style="margin-top: 130px;" border="1px solid rgb(126, 126, 126)">
+      <table class="table table-bordered text-center nilai; font-size:14px" id="dataTable" width="100%" cellspacing="0" style="margin-top: 130px;" border="1px solid rgb(126, 126, 126)">
         <thead style="background-color: rgb(126, 126, 126)">
           <tr style="height: 10px">
-            <th style="width: 20px; text-center;">No</th>
-            <th>Muatan Pelajaran</th>
+            <th style="width: 5%; text-center;">No</th>
+            <th style="width: 70%; text-center;">Muatan Pelajaran</th>
             <th>Nilai</th>
             <th>Predikat</th>
           </tr>
@@ -177,11 +177,11 @@
           @endforeach
         </tbody>
       </table>
-      <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0">
+      <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0" style="font-size:14px">
         <tbody>
           <tr>
-            <td style="width: 20px">8</td>
-            <td>Seni dan Budaya</td>
+            <td style="width: 6%; text-center;">8</td>
+            <td style="width: 70%; text-center;">Seni dan Budaya</td>
             <td>Nilai</td>
             <td>Predikat</td>
           </tr>
@@ -246,16 +246,11 @@
             @endforeach --}}
         </tbody>
       </table>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0">
+      <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0" style="font-size:14px">
         <tbody>
           <tr>
-            <td style="width: 20px">9</td>
-            <td>Muatan Lokal</td>
+            <td style="width: 6%; text-center;">9</td>
+            <td style="width: 70%; text-center;">Muatan Lokal</td>
             <td>Nilai</td>
             <td>Predikat</td>
           </tr>
@@ -320,7 +315,7 @@
             @endforeach --}}
         </tbody>
       </table>
-      <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0">
+      <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0" style="font-size:14px">
         <thead>
           <tr>
             <th style="width: 50%">Ketidakhadiran</th>
@@ -359,8 +354,8 @@
                     // $j = ;
                     $foto = storage_path("app/public/" . Auth::user()->guru->ttd);
                 ?>
-            <p style="text-align:right">Semarang, {{$tanggal}}</p>
-             <table style="width: 50%; position:absolute;" align="left">
+            <p style="text-align:right; font-size:14px">Semarang, {{$tanggal}}</p>
+             <table style="width: 50%; position:absolute; font-size:14px" align="left">
                 <tr>
                     <td>Mengetahui Orang Tua,</td>
                 </tr>
@@ -374,7 +369,7 @@
                     </td>
                 </tr>
               </table>
-              <table style="position: absolute; width: 50%; text-align:right" align="right">
+              <table style="position: absolute; width: 50%; text-align:right; font-size:14px" align="right">
                     <tr>
                         <td>Wali Kelas</td>
                     </tr>
