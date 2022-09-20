@@ -44,6 +44,8 @@
           <a class="collapse-item" href="{{route('thnakademik.index')}}">Tahun Akademik</a>
           <a class="collapse-item" href="{{route('mapel.index')}}">Mata Pelajaran</a>
           <a class="collapse-item" href="{{route('project.index')}}">Project</a>
+          <a class="collapse-item" href="{{route('seni.index')}}">Seni</a>
+          <a class="collapse-item" href="{{route('hadir.index')}}">Kehadiran</a>
           <a class="collapse-item" href="/jadwalmapel">Jadwal Pelajaran</a>
         </div>
       </div>

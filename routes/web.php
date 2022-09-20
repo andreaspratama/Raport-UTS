@@ -84,6 +84,9 @@ Route::prefix('/')
             Route::resource('mapel', 'MapelController');
             Route::get('project/{project}/hapus', 'ProjectController@hapus');
             Route::resource('project', 'ProjectController');
+            Route::get('hadir/{hadir}/hapus', 'HadirController@hapus');
+            Route::resource('hadir', 'HadirController');
+            Route::resource('seni', 'SeniController');
             Route::get('cetakTglklsPdf', 'TinggalkelasController@cetakPDF')->name('tglkelas.cetakpdf');
             Route::get('cetakTglklsExcel', 'TinggalkelasController@cetakEXCEL')->name('tglkelas.cetakexcel');
             Route::get('siswa/{tinggalkelas}/tinggalkelas', 'TinggalkelasController@hapus')->name('tglkelas');
@@ -172,6 +175,14 @@ Route::prefix('/')
             Route::put('/siswa/{id}/{idproject}/nilaiupdateproject', 'NilaiController@nilaiupdateproject');
             Route::get('cetakNilai/{siswa}/cetakProses', 'NilaiController@cetakNilaiPeraka');
             Route::get('/cetakNilaiPeraka/{siswa}/{thnakademik}', 'NilaiController@cetakNilaiPeraka');
+            Route::get('/siswa/{id}/{idhadir}/nilaitambahhadir', 'NilaiController@nilaitambahhadir');
+            Route::post('/siswa/{id}/{idhadir}/nilaiupdatehadir', 'NilaiController@nilaiupdatehadir');
+            Route::get('/siswa/{id}/{idhadir}/nilaiedithadir', 'NilaiController@nilaiedithadir');
+            Route::post('/siswa/{id}/{idhadir}/editnilaiupdatehadir', 'NilaiController@editnilaiupdatehadir');
+            Route::get('/siswa/{id}/{idseni}/nilaitambahseni', 'NilaiController@nilaitambahseni');
+            Route::post('/siswa/{id}/{idseni}/nilaiupdateseni', 'NilaiController@nilaiupdateseni');
+            Route::get('/siswa/{id}/{idseni}/nilaieditseni', 'NilaiController@nilaieditseni');
+            Route::post('/siswa/{id}/{idseni}/editnilaiupdateseni', 'NilaiController@editnilaiupdateseni');
             // Route::post('guru/store', 'TugasController@store');
         });
     });

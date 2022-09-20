@@ -15,11 +15,6 @@ class CreateInfosTable extends Migration
     {
         Schema::create('infos', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
-            $table->string('slug');
-            $table->date('tanggal');
-            $table->text('image');
-            $table->longText('deskripsi');
             $table->timestamps();
         });
     }

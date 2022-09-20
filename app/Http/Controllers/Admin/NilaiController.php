@@ -11,6 +11,8 @@ use App\Thnakademik;
 use App\User;
 use App\Sekolah;
 use App\Project;
+use App\Kehadiran;
+use App\Seni;
 use Illuminate\Http\Request;
 use PDF;
 use App\Exports\AbsensiswaExport;
@@ -46,8 +48,10 @@ class NilaiController extends Controller
         $mapel = Mapel::all();
         $thnakademiks = Thnakademik::all();
         $projects = Project::all();
+        $hadir = Kehadiran::all();
+        $seni = Seni::all();
 
-        return view('pages.admin.siswa.tambahnilai', compact('item', 'mapel', 'thnakademiks', 'projects'));
+        return view('pages.admin.siswa.tambahnilai', compact('item', 'mapel', 'thnakademiks', 'projects', 'hadir', 'seni'));
     }
 
     public function detailNilai($id)
@@ -96,6 +100,20 @@ class NilaiController extends Controller
         return view('pages.admin.siswa.inputnilaiproject', [
             'item' => $item,
             'project' => $project,
+            'thnakademiks' => $thnakademiks
+        ]);
+    }
+
+    public function nilaitambahhadir($id, $idhadir)
+    {
+        $item = Siswa::findOrFail($id);
+        // $nilai = $item->mapel()->findOrFail($idmapel);
+        $hadir = Kehadiran::findOrFail($idhadir);
+        $thnakademiks = Thnakademik::all();
+
+        return view('pages.admin.siswa.inputnilaihadir', [
+            'item' => $item,
+            'hadir' => $hadir,
             'thnakademiks' => $thnakademiks
         ]);
     }
@@ -177,6 +195,48 @@ class NilaiController extends Controller
         return redirect('siswa/'.$id.'/nilai')->with('status', 'Nilai Berhasil Ditambahkan');
     }
 
+    public function nilaiupdatehadir(Request $request, $id, $idhadir)
+    {
+        $item = Siswa::findOrFail($id);
+        $hadir = Kehadiran::findOrFail($idhadir);
+
+        $item->hadir()->attach($hadir, ['nilai' => $request->nilai]);
+        
+        // $siswa = Siswa::findOrFail($id);
+
+        // $siswa->mapel()->updateExistingPivot($request->mapel, ['nilai' => $request->nilai]);
+
+        // dd($siswa);
+
+        return redirect('siswa/'.$id.'/nilai')->with('status', 'Nilai Berhasil Ditambahkan');
+    }
+
+    public function nilaiedithadir($id, $idhadir)
+    {
+        $item = Siswa::findOrFail($id);
+        // $nilai = $item->mapel()->findOrFail($idmapel);
+        $isi = $item->hadir()->findOrFail($idhadir);
+        $hadir = Kehadiran::findOrFail($idhadir);
+        $thnakademiks = Thnakademik::all();
+
+        return view('pages.admin.siswa.editnilaihadir', [
+            'item' => $item,
+            'hadir' => $hadir,
+            'isi' => $isi,
+            'thnakademiks' => $thnakademiks
+        ]);
+    }
+
+    public function editnilaiupdatehadir(Request $request, $id, $idhadir)
+    {
+        $item = Siswa::findOrFail($id);
+        $hadir = Kehadiran::findOrFail($idhadir);
+
+        $item->hadir()->updateExistingPivot($hadir, ['nilai' => $request->nilai]);
+
+        return redirect('siswa/'.$id.'/nilai')->with('status', 'Nilai Berhasil Diubah');
+    }
+
     public function editnilaiupdate(Request $request, $id, $idmapel)
     {
         $item = Siswa::findOrFail($id);
@@ -245,9 +305,11 @@ class NilaiController extends Controller
         $thnakademiks = Thnakademik::all();
         $projects = Project::all();
         $sekolah = Sekolah::all();
+        $hadir = Kehadiran::all();
+        $seni = Seni::all();
         $tanggal = date("d-m-Y");
 
-        $pdf = \PDF::loadview('export.cetakNilaiSiswapdf', compact('mapel', 'item', 'sekolah', 'projects', 'thnakademiks', 'tanggal'));
+        $pdf = \PDF::loadview('export.cetakNilaiSiswapdf', compact('mapel', 'item', 'sekolah', 'projects', 'thnakademiks', 'tanggal', 'hadir', 'seni'));
         // return $pdf->download('laporan-absen.pdf');
         return $pdf->stream();
     }
@@ -266,5 +328,61 @@ class NilaiController extends Controller
         //     'nilai' => $nilai,
         //     'mapel' => $mapel
         // ]);
+    }
+
+    public function nilaitambahseni($id, $idseni)
+    {
+        $item = Siswa::findOrFail($id);
+        // $nilai = $item->mapel()->findOrFail($idmapel);
+        $seni = Seni::findOrFail($idseni);
+        $thnakademiks = Thnakademik::all();
+
+        return view('pages.admin.siswa.inputnilaiseni', [
+            'item' => $item,
+            'seni' => $seni,
+            'thnakademiks' => $thnakademiks
+        ]);
+    }
+
+    public function nilaiupdateseni(Request $request, $id, $idseni)
+    {
+        $item = Siswa::findOrFail($id);
+        $seni = Seni::findOrFail($idseni);
+
+        $item->seni()->attach($seni, ['nilai' => $request->nilai]);
+        
+        // $siswa = Siswa::findOrFail($id);
+
+        // $siswa->mapel()->updateExistingPivot($request->mapel, ['nilai' => $request->nilai]);
+
+        // dd($siswa);
+
+        return redirect('siswa/'.$id.'/nilai')->with('status', 'Nilai Berhasil Ditambahkan');
+    }
+
+    public function nilaieditseni($id, $idseni)
+    {
+        $item = Siswa::findOrFail($id);
+        // $nilai = $item->mapel()->findOrFail($idmapel);
+        $isi = $item->seni()->findOrFail($idseni);
+        $seni = Seni::findOrFail($idseni);
+        $thnakademiks = Thnakademik::all();
+
+        return view('pages.admin.siswa.editnilaiseni', [
+            'item' => $item,
+            'seni' => $seni,
+            'isi' => $isi,
+            'thnakademiks' => $thnakademiks
+        ]);
+    }
+
+    public function editnilaiupdateseni(Request $request, $id, $idseni)
+    {
+        $item = Siswa::findOrFail($id);
+        $seni = Seni::findOrFail($idseni);
+
+        $item->seni()->updateExistingPivot($seni, ['nilai' => $request->nilai]);
+
+        return redirect('siswa/'.$id.'/nilai')->with('status', 'Nilai Berhasil Diubah');
     }
 }

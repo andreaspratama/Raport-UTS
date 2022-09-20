@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOnlinepembsTable extends Migration
+class CreateSeniSiswaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateOnlinepembsTable extends Migration
      */
     public function up()
     {
-        Schema::create('onlinepembs', function (Blueprint $table) {
+        Schema::create('seni_siswa', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('nisn');
-            $table->string('nama');
-            $table->integer('jenispem_id');
-            $table->date('tanggal');
-            $table->integer('kelas');
-            $table->text('image');
+            $table->integer('siswa_id');
+            $table->integer('seni_id')->nullable();
+            $table->string('thnakademik')->nullable();
+            $table->string('nilai')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateOnlinepembsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('onlinepembs');
+        Schema::dropIfExists('seni_siswa');
     }
 }

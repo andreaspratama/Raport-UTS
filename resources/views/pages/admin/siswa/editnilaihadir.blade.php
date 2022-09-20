@@ -1,7 +1,7 @@
 @extends('layouts.admin.admin')
 
 @section('title')
-    Input Nilai
+    Edit Nilai Hadir
 @endsection
 
 @section('content')
@@ -9,20 +9,20 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Input Nilai Project Siswa {{$item->nama}}</h1>
+        <h1 class="h3 mb-2 text-gray-800">Edit Nilai Hadir Siswa {{$item->nama}}</h1>
 
         <div class="card shadow">
             <div class="card-body">
-              <form action="/siswa/{{$item->id}}/{{$project->id}}/nilaiupdateproject" method="POST">
+              <form action="/siswa/{{$item->id}}/{{$hadir->id}}/editnilaiupdatehadir" method="POST">
                 @csrf
                 <div class="form-group">
-                  <label for="nama">Project</label>
+                  <label for="hadir">Hadir</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="nama"><i class="far fa-id-card"></i></span>
+                      <span class="input-group-text" id="hadir"><i class="far fa-id-card"></i></span>
                     </div>
-                    <input type="text" class="form-control @error('nama') is-invalid @enderror" placeholder="nama" name="nama" value="{{$project->nama}}" disabled>
-                    @error('nama')
+                    <input type="text" class="form-control @error('hadir') is-invalid @enderror" placeholder="Hadir" name="hadir" value="{{$hadir->nama}}" disabled>
+                    @error('hadir')
                       <div class="invalid-feedback">
                           {{$message}}
                       </div>
@@ -35,7 +35,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text" id="nilai"><i class="far fa-id-card"></i></span>
                       </div>
-                      <input type="text" class="form-control @error('nilai') is-invalid @enderror" placeholder="Nilai" name="nilai">
+                      <input type="text" class="form-control @error('nilai') is-invalid @enderror" placeholder="Nilai" name="nilai" value="{{$isi->pivot->nilai}}">
                       @error('nilai')
                         <div class="invalid-feedback">
                             {{$message}}
@@ -43,7 +43,7 @@
                       @enderror
                     </div>
                 </div>
-                <button class="btn btn-primary btn-sm" type="submit">Simpan Nilai</button>
+                <button class="btn btn-primary btn-sm" type="submit">Simpan Perubahan</button>
               </form>
             </div>
         </div>

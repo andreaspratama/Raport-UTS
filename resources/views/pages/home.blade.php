@@ -125,7 +125,7 @@
                     </div>
                 </div>
             @endif
-            {{$infos->links()}}
+            {{-- {{$infos->links()}} --}}
         </div>
 
     </div>

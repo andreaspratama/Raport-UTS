@@ -10,14 +10,7 @@
     {{-- <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> --}}
     {{-- <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"> --}}
-    <style>
-        header {
-            height: 155px;
-            /* padding: 10px; */
-            margin: 0;
-            background-color: #3366cc;
-        }
-        
+    <style>        
         img {
             /* line-height: 100px; */
             width: 150px;
@@ -61,184 +54,353 @@
   </head>
   <body>
       <header>
-        <center>
-            <?php
-                $logos = storage_path("app/public/assets/gallery/logo-putih.png")
-            ?>
-            <img src="{{$logos}}" alt="">
-        </center>
-        <center>
-            <div class="text-head-title">
-                <h2>Project Based Report</h2>
-            </div>
-        </center>
-        <center>
-            <div class="text-head">
-                @if ($item->unit === 'SMA')
-                    <div class="unit">
-                        SMA Kristen YSKI Semarang
-                    </div>
-                    <br>
-                    <div class="unit-text">
-                        Jl. Sidodadi Timur No. 23
-                    </div>
-                @elseif($item->unit === 'SMP')
-                    <div class="unit">
-                        SMP Kristen YSKI Semarang
-                    </div>
-                    <br>
-                    <div class="unit-text">
-                        Jl. Sidodadi Timur No. 23
-                    </div>
-                @elseif($item->unit === 'K1')
-                    <div class="unit">
-                        SD Kristen 1 YSKI Semarang
-                    </div>
-                    <br>
-                    <div class="unit-text">
-                        Jl. Kompol Maksum No. 280 Semarang
-                    </div>
-                @endif
-            </div>
-        </center>
-      </header>
-      <table style="margin-top: 15px">
+        <?php
+            $logos = storage_path("app/public/assets/logo.png")
+        ?>
+        <img src="{{$logos}}" alt="" style="width: 70px; position: absolute; height: auto">
+        <table style="width: 100%">
             <tr>
-                <td style="font-weight: bold">Student Name</td>
-                <td style="font-weight: bold">:</td>
-                <td style="font-weight: bold">{{$item->nama}}</td>
+                <td align="center">
+                    <span style="line-height: 1.6; font-weight: bold; font-size: 20px">
+                        Laporan Hasil Belajar Tengah Semester
+                    </span>
+                </td>
+            </tr>
+        </table>
+      </header>
+      <table style="margin-top: 50px; width: 60%; position:absolute;">
+        <tr>
+            <td style="font-weight: bold; width:128px">Nama Siswa</td>
+            <td style="font-weight: bold; width:10px">:</td>
+            <td style="font-weight: bold">{{$item->nama}}</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold">Nomor Induk</td>
+            <td style="font-weight: bold">:</td>
+            <td style="font-weight: bold">{{$item->nisn}}</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold">Nama Sekolah</td>
+            <td style="font-weight: bold">:</td>
+            @if ($item->unit == 'K1')
+                <td style="font-weight: bold">SD Kristen 1 YSKI</td>
+            @elseif($item->unit == 'K2')
+                <td style="font-weight: bold">SD Kristen 2 YSKI</td>
+            @elseif($item->unit == 'K3')
+                <td style="font-weight: bold">SD Kristen 3 YSKI</td>
+            @endif
+        </tr>
+        <tr>
+            <td style="font-weight: bold">Alamat Sekolah</td>
+            <td style="font-weight: bold">:</td>
+            @if ($item->unit == 'K1')
+                <td style="font-weight: bold">Jl. Kompol Maksum No.280 Semarang</td>
+            @elseif($item->unit == 'K2')
+                <td style="font-weight: bold">Jl. Dokter Cipto No.109 Semarang</td>
+            @elseif($item->unit == 'K3')
+                <td style="font-weight: bold">Jl. Tanjung No.14 Semarang</td>
+            @endif
+        </tr>
+      </table>
+      <table style="margin-top: 28px; position: absolute; width: 40%;" align="right">
+            <tr>
+                <td style="font-weight: bold; width:130px">Kelas</td>
+                <td style="font-weight: bold; width:10px">:</td>
+                @if ($item->kelas == '4A')
+                    <td style="font-weight: bold">IVA (empat)</td>
+                @elseif($item->kelas == '4B')
+                    <td style="font-weight: bold">IVB (empat)</td>
+                @elseif($item->kelas == '4C')
+                    <td style="font-weight: bold">IVC (empat)</td>
+                @elseif($item->kelas == '1A')
+                    <td style="font-weight: bold">IA (satu)</td>
+                @elseif($item->kelas == '1B')
+                    <td style="font-weight: bold">IB (satu)</td>
+                @endif
             </tr>
             <tr>
-                <td style="font-weight: bold">Student ID Number</td>
+                <td style="font-weight: bold">Semester</td>
                 <td style="font-weight: bold">:</td>
-                <td style="font-weight: bold">{{$item->nisn}}</td>
+                <td style="font-weight: bold">1 (Satu)</td>
             </tr>
             <tr>
                 @foreach ($thnakademiks as $akdm)
                     @if ($akdm->status == 'Aktif')
-                        <td style="font-weight: bold">Academic Year</td>
+                        <td style="font-weight: bold">Tahun Pelajaran</td>
                         <td style="font-weight: bold">:</td>
-                        <td style="font-weight: bold">{{$akdm->tahun_akademik}} {{$akdm->semester}}</td>
+                        <td style="font-weight: bold">{{$akdm->tahun_akademik}}</td>
                     @endif
                 @endforeach
             </tr>
       </table>
-    <h3 class="mt-4 soft" style="font-weight: bold">Soft Skills Project</h3>
-    <table class="table table-striped table-bordered text-center table-sm mt-3" width="100%">
-        <thead>
-            <tr class="bg-primary text-white">
-                <th width="4%">No</th> 
-                <th width="23%">Aspek</th>
-                <th width="6%">Nilai</th>
-                <th>Deskripsi</th>
-            </tr>
+      <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0" style="margin-top: 130px;" border="1px solid rgb(126, 126, 126)">
+        <thead style="background-color: rgb(126, 126, 126)">
+          <tr style="height: 10px">
+            <th style="width: 20px; text-center;">No</th>
+            <th>Muatan Pelajaran</th>
+            <th>Nilai</th>
+            <th>Predikat</th>
+          </tr>
         </thead>
         <tbody>
-            @foreach ($mapel as $m)
-                            <tr>
-                              <td>{{$loop->iteration}}</td>
-                              <td>
-                                {{$m->nama_mapel}}
-                              </td>
-                              <td>
-                                @foreach ($item->mapel as $ma)
-                                    @if ($m->id === $ma->pivot->mapel_id)
-                                      @if ($ma->pivot->nilai >= 90)
-                                          A
-                                      @elseif ($ma->pivot->nilai >= 80)
-                                          AB
-                                      @elseif ($ma->pivot->nilai >= 70)
-                                          B
-                                      @elseif ($ma->pivot->nilai <=69)
-                                          C
-                                      @endif
-                                        {{-- {{$ma->pivot->nilai}} --}}
-                                    {{-- @elseif ($m->id === $ma->pivot->mapel_id)
-                                        {{$ma->pivot->nilai}}
-                                    @elseif ($m->id === $ma->pivot->mapel_id)
-                                        {{$ma->pivot->nilai}}
-                                    @elseif ($m->id === $ma->pivot->mapel_id)
-                                        {{$ma->pivot->nilai}}
-                                    @elseif ($m->id === $ma->pivot->mapel_id)
-                                        {{$ma->pivot->nilai}} --}}
-                                    @endif
-                                @endforeach
-                              </td>
-                              <td>
-                                @if ($m->nama_mapel === 'Critical Thinking')
-                                    Kemampuan memecahkan masalah dan kedalaman berpikir
-                                @elseif ($m->nama_mapel === 'Creativity')
-                                    Kemampuan menghasilkan karya yang autentik / orisinal
-                                @elseif ($m->nama_mapel === 'Communication')
-                                    Kemampuan dan Kejelasan menyampaikan pesan
-                                @elseif ($m->nama_mapel === 'Collaboration')
-                                    Kerjasama dan Kemampuan beradaptasi dalam tim
-                                @elseif ($m->nama_mapel === 'Leadership')
-                                    Sikap Tanggung Jawab dan Kedisiplinan
-                                @endif
-                              </td>
-                            </tr>
-                            @endforeach
+          @foreach ($mapel as $m)
+          <tr>
+            <td>
+              {{$loop->iteration}}
+            </td>
+            <td>
+              {{$m->nama_mapel}}
+            </td>
+            <td>
+              @foreach ($item->mapel as $ma)
+                @if ($m->id === $ma->pivot->mapel_id)
+                    {{$ma->pivot->nilai}}
+                @endif
+              @endforeach
+            </td>
+            <td>
+              @foreach ($item->mapel as $ma)
+                  @if ($m->id === $ma->pivot->mapel_id)
+                    @if ($ma->pivot->nilai >= 86)
+                        A
+                    @elseif ($ma->pivot->nilai >= 71)
+                        B
+                    @elseif ($ma->pivot->nilai >= 56)
+                        C
+                    @elseif ($ma->pivot->nilai <=55)
+                        D
+                    @endif
+                  @endif
+              @endforeach
+            </td>
+          </tr>
+          @endforeach
         </tbody>
-    </table>
-    <h3 class="mt-5 soft" style="font-weight: bold">Project</h3>
-    <table class="table table-striped table-bordered text-center table-sm mt-3">
-        <thead>
-            <tr class="bg-primary text-white">
-                <th>No</th>
-                <th>Project</th>
-                <th>Nilai</th>
-                <th>Pengerjaan Project</th>
-                <th>Hasil</th>
+      </table>
+      <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="width: 20px">8</td>
+            <td>Seni dan Budaya</td>
+            <td>Nilai</td>
+            <td>Predikat</td>
+          </tr>
+        </tbody>
+        <tbody>
+          @foreach ($seni as $s)
+            <tr>
+                <td></td>
+              <td>
+                {{$s->nama}}
+              </td>
+              <td>
+                @foreach ($item->seni as $sn)
+                    @if ($s->id === $sn->pivot->seni_id)
+                      {{$sn->pivot->nilai}}
+                        {{-- {{$ma->pivot->nilai}} --}}
+                    {{-- @elseif ($m->id === $ma->pivot->mapel_id)
+                        {{$ma->pivot->nilai}}
+                    @elseif ($m->id === $ma->pivot->mapel_id)
+                        {{$ma->pivot->nilai}}
+                    @elseif ($m->id === $ma->pivot->mapel_id)
+                        {{$ma->pivot->nilai}}
+                    @elseif ($m->id === $ma->pivot->mapel_id)
+                        {{$ma->pivot->nilai}} --}}
+                    @endif
+                @endforeach
+              </td>
+              <td>
+                @foreach ($item->seni as $sn)
+                  @if ($s->id === $sn->pivot->seni_id)
+                    @if ($sn->pivot->nilai >= 86)
+                        A
+                    @elseif ($sn->pivot->nilai >= 71)
+                        B
+                    @elseif ($sn->pivot->nilai >= 56)
+                        C
+                    @elseif ($sn->pivot->nilai <=55)
+                        D
+                    @endif
+                  @endif
+                @endforeach
+              </td>
             </tr>
+          @endforeach
+            {{-- @foreach ($projects as $p)
+              <tr>
+                <td>{{$p->project}}</td>
+                <td>{{$p->nilai_pro}}</td>
+                <td>{{$p->pengerjaan}}</td>
+                <td><a href="{{$p->hasil}}">Klik Disini</a></td>
+                <td>
+                  <a href="/edit/{{$p->siswa->id}}/{{$p->id}}/project" class="btn btn-primary btn-sm btn-warning">Edit</a> --}}
+                  {{-- <a href="/siswa/{{$item->id}}/{{$mapel->id}}/nilaitambah" class="btn btn-primary btn-sm">Tambah / Edit</a> --}}
+                  {{-- <a href="/siswa/{{$item->id}}/{{$mapel->id}}/hapus" class="btn btn-danger btn-sm">Hapus</a> --}}
+                  {{-- <form action="/siswa/{{$item->id}}/{{$mapel->id}}/nilaihapus" method="post" class="btn btn-danger btn-sm d-inline">
+                    @csrf
+                    @method('delete')
+                    Hapus
+                  </form> --}}
+                {{-- </td>
+              </tr>
+            @endforeach --}}
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="width: 20px">9</td>
+            <td>Muatan Lokal</td>
+            <td>Nilai</td>
+            <td>Predikat</td>
+          </tr>
+        </tbody>
+        <tbody>
+          @foreach ($projects as $p)
+            <tr>
+                <td></td>
+              <td>
+                {{$p->nama}}
+              </td>
+              <td>
+                @foreach ($item->project as $pro)
+                    @if ($p->id === $pro->pivot->project_id)
+                      {{$pro->pivot->nilai}}
+                        {{-- {{$ma->pivot->nilai}} --}}
+                    {{-- @elseif ($m->id === $ma->pivot->mapel_id)
+                        {{$ma->pivot->nilai}}
+                    @elseif ($m->id === $ma->pivot->mapel_id)
+                        {{$ma->pivot->nilai}}
+                    @elseif ($m->id === $ma->pivot->mapel_id)
+                        {{$ma->pivot->nilai}}
+                    @elseif ($m->id === $ma->pivot->mapel_id)
+                        {{$ma->pivot->nilai}} --}}
+                    @endif
+                @endforeach
+              </td>
+              <td>
+                @foreach ($item->project as $pro)
+                  @if ($p->id === $pro->pivot->project_id)
+                    @if ($pro->pivot->nilai >= 86)
+                        A
+                    @elseif ($pro->pivot->nilai >= 71)
+                        B
+                    @elseif ($pro->pivot->nilai >= 56)
+                        C
+                    @elseif ($pro->pivot->nilai <=55)
+                        D
+                    @endif
+                  @endif
+                @endforeach
+              </td>
+            </tr>
+          @endforeach
+            {{-- @foreach ($projects as $p)
+              <tr>
+                <td>{{$p->project}}</td>
+                <td>{{$p->nilai_pro}}</td>
+                <td>{{$p->pengerjaan}}</td>
+                <td><a href="{{$p->hasil}}">Klik Disini</a></td>
+                <td>
+                  <a href="/edit/{{$p->siswa->id}}/{{$p->id}}/project" class="btn btn-primary btn-sm btn-warning">Edit</a> --}}
+                  {{-- <a href="/siswa/{{$item->id}}/{{$mapel->id}}/nilaitambah" class="btn btn-primary btn-sm">Tambah / Edit</a> --}}
+                  {{-- <a href="/siswa/{{$item->id}}/{{$mapel->id}}/hapus" class="btn btn-danger btn-sm">Hapus</a> --}}
+                  {{-- <form action="/siswa/{{$item->id}}/{{$mapel->id}}/nilaihapus" method="post" class="btn btn-danger btn-sm d-inline">
+                    @csrf
+                    @method('delete')
+                    Hapus
+                  </form> --}}
+                {{-- </td>
+              </tr>
+            @endforeach --}}
+        </tbody>
+      </table>
+      <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th style="width: 50%">Ketidakhadiran</th>
+            <th style="width: 50%">Hari</th>
+          </tr>
         </thead>
         <tbody>
-            @foreach ($projects as $p)
-                              <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>
-                                  {{$p->nama}}
-                                </td>
-                                <td>
-                                  @foreach ($item->project as $pro)
-                                      @if ($p->id === $pro->pivot->project_id)
-                                        {{$pro->pivot->nilai}}
-                                          {{-- {{$ma->pivot->nilai}} --}}
-                                      {{-- @elseif ($m->id === $ma->pivot->mapel_id)
-                                          {{$ma->pivot->nilai}}
-                                      @elseif ($m->id === $ma->pivot->mapel_id)
-                                          {{$ma->pivot->nilai}}
-                                      @elseif ($m->id === $ma->pivot->mapel_id)
-                                          {{$ma->pivot->nilai}}
-                                      @elseif ($m->id === $ma->pivot->mapel_id)
-                                          {{$ma->pivot->nilai}} --}}
-                                      @endif
-                                  @endforeach
-                                </td>
-                                <td>
-                                  @foreach ($item->project as $pro)
-                                    {{$pro->pivot->task}}
-                                  @endforeach
-                                </td>
-                                <td>
-                                  @foreach ($item->project as $pro)
-                                    <a href="{{$pro->pivot->hasil}}">Klik Untuk Melihat Hasil</a>
-                                  @endforeach
-                                </td>
-                              </tr>
-                            @endforeach
+          @foreach ($hadir as $h)
+            <tr>
+              <td>
+                {{$h->nama}}
+              </td>
+              <td>
+                @foreach ($item->hadir as $had)
+                    @if ($h->id === $had->pivot->kehadiran_id)
+                      {{$had->pivot->nilai}}
+                        {{-- {{$ma->pivot->nilai}} --}}
+                    {{-- @elseif ($m->id === $ma->pivot->mapel_id)
+                        {{$ma->pivot->nilai}}
+                    @elseif ($m->id === $ma->pivot->mapel_id)
+                        {{$ma->pivot->nilai}}
+                    @elseif ($m->id === $ma->pivot->mapel_id)
+                        {{$ma->pivot->nilai}}
+                    @elseif ($m->id === $ma->pivot->mapel_id)
+                        {{$ma->pivot->nilai}} --}}
+                    @endif
+                @endforeach
+              </td>
+            </tr>
+          @endforeach
         </tbody>
-    </table>   
-
+      </table>
+      <br>
     <footer>
+        <?php
+                    // $j = ;
+                    $foto = storage_path("app/public/" . Auth::user()->guru->ttd);
+                ?>
+            <p style="text-align:right">Semarang, {{$tanggal}}</p>
+             <table style="width: 50%; position:absolute;" align="left">
+                <tr>
+                    <td>Mengetahui Orang Tua,</td>
+                </tr>
+                <tr>
+                    <td>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        .......................................
+                    </td>
+                </tr>
+              </table>
+              <table style="position: absolute; width: 50%; text-align:right" align="right">
+                    <tr>
+                        <td>Wali Kelas</td>
+                    </tr>
+                    <tr>
+                        <td><img src="{{$foto}}" alt="" style="margin-top:10px"></td>
+                    </tr>
+                    <tr>
+                        <td>{{Auth::user()->name}}</td>
+                    </tr>
+              </table>
         <div class="ttd mt-5" style="text-align: right">
-            <p style="margin-right: 30px">Semarang, {{$tanggal}}</p>
-            <?php
-                // $j = ;
-                $foto = storage_path("app/public/" . Auth::user()->guru->ttd);
-            ?>
-            <p style="margin-right: 25px"><img src="{{$foto}}" alt=""></p>
-            <p style="margin-top: -15px; margin-right: 30px">{{Auth::user()->name}}</p>
+            
+            {{-- <span class="guru" style="width: 50%; background-color: red; position:absolute">
+                <?php
+                    // $j = ;
+                    $foto = storage_path("app/public/" . Auth::user()->guru->ttd);
+                ?>
+                <p style="margin-top: 15px; margin-right: 30px">Wali Kelas</p>
+                <p style="margin-right: 25px"><img src="{{$foto}}" alt=""></p>
+                <p style="margin-top: -15px; margin-right: 30px">{{Auth::user()->name}}</p>
+            </span>
+            <span class="ortu" style="width: 30%; position:absolute; background-color:aqua; height: 30%" align="right">
+                <p style="margin-top: 15px; margin-right: 30px">Wali Kelas</p>
+                <p style="margin-right: 25px"><img src="{{$foto}}" alt=""></p>
+                <p style="margin-top: -15px; margin-right: 30px">{{Auth::user()->name}}</p>
+            </span> --}}
         </div>
     </footer>
     <!-- Optional JavaScript -->

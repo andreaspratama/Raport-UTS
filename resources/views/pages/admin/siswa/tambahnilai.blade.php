@@ -9,7 +9,7 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Tambah Nilai Siswa {{$item->nama}}</h1>
+        <h1 class="h3 mb-2 text-gray-800">Tambah  Siswa {{$item->nama}}</h1>
 
         <div class="card shadow">
             <div class="card-body">
@@ -22,14 +22,15 @@
                       {{-- <button type="button" class="btn btn-primary mb-3 btn-sm" data-toggle="modal"data-target="#exampleModal">
                           Tambah Nilai
                       </button> --}}
-                      <h3 class="text-primary" style="font-weight: bold">Soft Skills Project</h3>
+                      <h3 class="text-primary" style="font-weight: bold">Nilai</h3>
                       <div class="table-responsive">
                         <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0">
                           <thead>
                             <tr>
-                              <th>Aspek</th>
+                              <th>No</th>
+                              <th>Muatan Pelajaran</th>
                               <th>Nilai</th>
-                              <th>Deskripsi</th>
+                              <th>Predikat</th>
                               <th>Aksi</th>
                             </tr>
                           </thead>
@@ -37,20 +38,28 @@
                             @foreach ($mapel as $m)
                             <tr>
                               <td>
+                                {{$loop->iteration}}
+                              </td>
+                              <td>
                                 {{$m->nama_mapel}}
                               </td>
                               <td>
                                 @foreach ($item->mapel as $ma)
+                                  @if ($m->id === $ma->pivot->mapel_id)
+                                      {{$ma->pivot->nilai}}
+                                  @endif
+                                @endforeach
+                                {{-- @foreach ($item->mapel as $ma)
                                     @if ($m->id === $ma->pivot->mapel_id)
-                                      @if ($ma->pivot->nilai >= 90)
+                                      @if ($ma->pivot->nilai >= 86)
                                           A
-                                      @elseif ($ma->pivot->nilai >= 80)
-                                          AB
-                                      @elseif ($ma->pivot->nilai >= 70)
+                                      @elseif ($ma->pivot->nilai >= 71)
                                           B
-                                      @elseif ($ma->pivot->nilai <=69)
+                                      @elseif ($ma->pivot->nilai >= 56)
                                           C
-                                      @endif
+                                      @elseif ($ma->pivot->nilai <=55)
+                                          D
+                                      @endif --}}
                                         {{-- {{$ma->pivot->nilai}} --}}
                                     {{-- @elseif ($m->id === $ma->pivot->mapel_id)
                                         {{$ma->pivot->nilai}}
@@ -60,11 +69,24 @@
                                         {{$ma->pivot->nilai}}
                                     @elseif ($m->id === $ma->pivot->mapel_id)
                                         {{$ma->pivot->nilai}} --}}
-                                    @endif
-                                @endforeach
+                                    {{-- @endif
+                                @endforeach --}}
                               </td>
                               <td>
-                                @if ($m->nama_mapel === 'Critical Thinking')
+                                @foreach ($item->mapel as $ma)
+                                    @if ($m->id === $ma->pivot->mapel_id)
+                                      @if ($ma->pivot->nilai >= 86)
+                                          A
+                                      @elseif ($ma->pivot->nilai >= 71)
+                                          B
+                                      @elseif ($ma->pivot->nilai >= 56)
+                                          C
+                                      @elseif ($ma->pivot->nilai <=55)
+                                          D
+                                      @endif
+                                    @endif
+                                @endforeach
+                                {{-- @if ($m->nama_mapel === 'Critical Thinking')
                                     Kemampuan memecahkan masalah dan kedalaman berpikir
                                 @elseif ($m->nama_mapel === 'Creativity')
                                     Kemampuan menghasilkan karya yang autentik / orisinal
@@ -74,7 +96,7 @@
                                     Kerjasama dan Kemampuan beradaptasi dalam tim
                                 @elseif ($m->nama_mapel === 'Leadership')
                                     Sikap Tanggung Jawab dan Kedisiplinan
-                                @endif
+                                @endif --}}
                               </td>
                               <td>
                                 @if ($item->mapel()->where('mapel_id', $m->id)->exists())
@@ -90,18 +112,85 @@
                           </tbody>
                         </table>
                       </div>
-                      {{-- <button type="button" class="btn btn-primary mb-3 btn-sm" data-toggle="modal"data-target="#project">
-                        Tambah Nilai
-                      </button> --}}
-                      <h3 class="text-primary" style="font-weight: bold">Project</h3>
                       <div class="table-responsive">
                         <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0">
                           <thead>
                             <tr>
-                              <th>Project</th>
+                              <th>Seni dan Budaya</th>
                               <th>Nilai</th>
-                              <th>Pengerjaan Project</th>
-                              <th>Hasil</th>
+                              <th>Predikat</th>
+                              <th>Aksi</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @foreach ($seni as $sn)
+                            <tr>
+                              <td>
+                                {{$sn->nama}}
+                              </td>
+                              <td>
+                                @foreach ($item->seni as $sen)
+                                      @if ($sn->id === $sen->pivot->seni_id)
+                                        {{$sen->pivot->nilai}}
+                                          {{-- {{$ma->pivot->nilai}} --}}
+                                      {{-- @elseif ($m->id === $ma->pivot->mapel_id)
+                                          {{$ma->pivot->nilai}}
+                                      @elseif ($m->id === $ma->pivot->mapel_id)
+                                          {{$ma->pivot->nilai}}
+                                      @elseif ($m->id === $ma->pivot->mapel_id)
+                                          {{$ma->pivot->nilai}}
+                                      @elseif ($m->id === $ma->pivot->mapel_id)
+                                          {{$ma->pivot->nilai}} --}}
+                                      @endif
+                                @endforeach
+                              </td>
+                              <td>
+                                @foreach ($item->seni as $sni)
+                                    @if ($sn->id === $sni->pivot->seni_id)
+                                      @if ($sni->pivot->nilai >= 86)
+                                          A
+                                      @elseif ($sni->pivot->nilai >= 71)
+                                          B
+                                      @elseif ($sni->pivot->nilai >= 56)
+                                          C
+                                      @elseif ($sni->pivot->nilai <=55)
+                                          D
+                                      @endif
+                                    @endif
+                                @endforeach
+                                {{-- @if ($m->nama_mapel === 'Critical Thinking')
+                                    Kemampuan memecahkan masalah dan kedalaman berpikir
+                                @elseif ($m->nama_mapel === 'Creativity')
+                                    Kemampuan menghasilkan karya yang autentik / orisinal
+                                @elseif ($m->nama_mapel === 'Communication')
+                                    Kemampuan dan Kejelasan menyampaikan pesan
+                                @elseif ($m->nama_mapel === 'Collaboration')
+                                    Kerjasama dan Kemampuan beradaptasi dalam tim
+                                @elseif ($m->nama_mapel === 'Leadership')
+                                    Sikap Tanggung Jawab dan Kedisiplinan
+                                @endif --}}
+                              </td>
+                              <td>
+                                @if ($item->seni()->where('seni_id', $sn->id)->exists())
+                                    <a href="/siswa/{{$item->id}}/{{$sn->id}}/nilaieditseni" class="btn btn-sm btn-warning">Edit Nilai</a>
+                                @else
+                                    <a href="/siswa/{{$item->id}}/{{$sn->id}}/nilaitambahseni" class="btn btn-primary btn-sm">Input Nilai</a>
+                                @endif
+                                <!--<a href="/siswa/{{$item->id}}/{{$m->id}}/nilaitambah" class="btn btn-primary btn-sm">Input Nilai</a>-->
+                                <!--<a href="/siswa/{{$item->id}}/{{$m->id}}/nilaiedit" class="btn btn-sm btn-warning">Edit Nilai</a>-->
+                              </td>
+                            </tr>
+                            @endforeach
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0">
+                          <thead>
+                            <tr>
+                              <th>Muatan Lokal</th>
+                              <th>Nilai</th>
+                              <th>Predikat</th>
                               <th>Aksi</th>
                             </tr>
                           </thead>
@@ -129,12 +218,17 @@
                                 </td>
                                 <td>
                                   @foreach ($item->project as $pro)
-                                    {{$pro->pivot->task}}
-                                  @endforeach
-                                </td>
-                                <td>
-                                  @foreach ($item->project as $pro)
-                                    <a href="{{$pro->pivot->hasil}}">Klik Disini Untuk Melihat</a>
+                                    @if ($p->id === $pro->pivot->project_id)
+                                      @if ($pro->pivot->nilai >= 86)
+                                          A
+                                      @elseif ($pro->pivot->nilai >= 71)
+                                          B
+                                      @elseif ($pro->pivot->nilai >= 56)
+                                          C
+                                      @elseif ($pro->pivot->nilai <=55)
+                                          D
+                                      @endif
+                                    @endif
                                   @endforeach
                                 </td>
                                 <td>
@@ -142,6 +236,67 @@
                                         <a href="/siswa/{{$item->id}}/{{$p->id}}/nilaieditproject" class="btn btn-sm btn-warning">Edit Nilai</a>
                                     @else
                                         <a href="/siswa/{{$item->id}}/{{$p->id}}/nilaitambahproject" class="btn btn-primary btn-sm">Input Nilai</a>
+                                    @endif
+                                </td>
+                              </tr>
+                            @endforeach
+                              {{-- @foreach ($projects as $p)
+                                <tr>
+                                  <td>{{$p->project}}</td>
+                                  <td>{{$p->nilai_pro}}</td>
+                                  <td>{{$p->pengerjaan}}</td>
+                                  <td><a href="{{$p->hasil}}">Klik Disini</a></td>
+                                  <td>
+                                    <a href="/edit/{{$p->siswa->id}}/{{$p->id}}/project" class="btn btn-primary btn-sm btn-warning">Edit</a> --}}
+                                    {{-- <a href="/siswa/{{$item->id}}/{{$mapel->id}}/nilaitambah" class="btn btn-primary btn-sm">Tambah / Edit</a> --}}
+                                    {{-- <a href="/siswa/{{$item->id}}/{{$mapel->id}}/hapus" class="btn btn-danger btn-sm">Hapus</a> --}}
+                                    {{-- <form action="/siswa/{{$item->id}}/{{$mapel->id}}/nilaihapus" method="post" class="btn btn-danger btn-sm d-inline">
+                                      @csrf
+                                      @method('delete')
+                                      Hapus
+                                    </form> --}}
+                                  {{-- </td>
+                                </tr>
+                              @endforeach --}}
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table table-bordered text-center nilai" id="dataTable" width="100%" cellspacing="0">
+                          <thead>
+                            <tr>
+                              <th>Ketidakhadiran</th>
+                              <th>Hari</th>
+                              <th>Aksi</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @foreach ($hadir as $h)
+                              <tr>
+                                <td>
+                                  {{$h->nama}}
+                                </td>
+                                <td>
+                                  @foreach ($item->hadir as $had)
+                                      @if ($h->id === $had->pivot->kehadiran_id)
+                                        {{$had->pivot->nilai}}
+                                          {{-- {{$ma->pivot->nilai}} --}}
+                                      {{-- @elseif ($m->id === $ma->pivot->mapel_id)
+                                          {{$ma->pivot->nilai}}
+                                      @elseif ($m->id === $ma->pivot->mapel_id)
+                                          {{$ma->pivot->nilai}}
+                                      @elseif ($m->id === $ma->pivot->mapel_id)
+                                          {{$ma->pivot->nilai}}
+                                      @elseif ($m->id === $ma->pivot->mapel_id)
+                                          {{$ma->pivot->nilai}} --}}
+                                      @endif
+                                  @endforeach
+                                </td>
+                                <td>
+                                    @if ($item->hadir()->where('kehadiran_id', $h->id)->exists())
+                                        <a href="/siswa/{{$item->id}}/{{$h->id}}/nilaiedithadir" class="btn btn-sm btn-warning">Edit Nilai</a>
+                                    @else
+                                        <a href="/siswa/{{$item->id}}/{{$h->id}}/nilaitambahhadir" class="btn btn-primary btn-sm">Input Nilai</a>
                                     @endif
                                 </td>
                               </tr>

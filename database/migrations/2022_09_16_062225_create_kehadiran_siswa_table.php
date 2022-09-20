@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTinggalkelasTable extends Migration
+class CreateKehadiranSiswaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateTinggalkelasTable extends Migration
      */
     public function up()
     {
-        Schema::create('tinggalkelas', function (Blueprint $table) {
+        Schema::create('kehadiran_siswa', function (Blueprint $table) {
             $table->id();
-            $table->integer('thnakademik_id');
-            $table->bigInteger('nisn');
-            $table->string('nama');
-            $table->integer('asal_kls');
-            $table->integer('tgl_kls');
-            $table->text('alasan');
+            $table->integer('siswa_id');
+            $table->integer('kehadiran_id')->nullable();
+            $table->string('nama')->nullable();
+            $table->string('nilai')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateTinggalkelasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tinggalkelas');
+        Schema::dropIfExists('kehadiran_siswa');
     }
 }
