@@ -13,7 +13,7 @@ class JadwalImport implements ToModel
 
     public function __construct()
     {
-        $this->guru = Guru::select('id', 'nama', 'nip')->get();
+        $this->guru = Guru::select('id', 'nama', 'email')->get();
     }
 
     public function model(array $row)

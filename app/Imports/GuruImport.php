@@ -20,7 +20,7 @@ class GuruImport implements ToModel
         $user = $this->users->where('name', $row[1])->where('username', $row[0])->first();
         return new Guru([
             'nama' => $row[1],
-            'nip' => $row[0],
+            'email' => $row[0],
             'ttd' => $row[2],
             'user_id' => $user->id ?? NULL,
         ]);
